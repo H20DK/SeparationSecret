@@ -1,6 +1,7 @@
-﻿namespace SeparationSecret
+﻿
+namespace SeparationSecret
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -75,12 +76,14 @@
             оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
             оПрограммеToolStripMenuItem.Size = new Size(221, 22);
             оПрограммеToolStripMenuItem.Text = "О программе";
+            оПрограммеToolStripMenuItem.Click += оПрограммеToolStripMenuItem_Click;
             // 
             // руководствоПользователяToolStripMenuItem
             // 
             руководствоПользователяToolStripMenuItem.Name = "руководствоПользователяToolStripMenuItem";
             руководствоПользователяToolStripMenuItem.Size = new Size(221, 22);
             руководствоПользователяToolStripMenuItem.Text = "Руководство пользователя";
+            руководствоПользователяToolStripMenuItem.Click += this.руководствоПользователяToolStripMenuItem_Click;
             // 
             // языкToolStripMenuItem
             // 
@@ -92,7 +95,7 @@
             // русскийToolStripMenuItem
             // 
             русскийToolStripMenuItem.Name = "русскийToolStripMenuItem";
-            русскийToolStripMenuItem.Size = new Size(180, 22);
+            русскийToolStripMenuItem.Size = new Size(119, 22);
             русскийToolStripMenuItem.Text = "Русский";
             // 
             // английскийToolStripMenuItem
@@ -101,7 +104,7 @@
             английскийToolStripMenuItem.Size = new Size(119, 22);
             английскийToolStripMenuItem.Text = "English";
             // 
-            // Form1
+            // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -109,13 +112,19 @@
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Margin = new Padding(3, 2, 3, 2);
-            Name = "Form1";
+            Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Separation Secret";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
+        }
+
+        private void руководствоПользователяToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            users_guide users_guide = new users_guide();
+            users_guide.ShowDialog();
         }
 
         #endregion
