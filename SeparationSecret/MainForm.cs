@@ -48,7 +48,7 @@ namespace SeparationSecret
         static List<string> output = new List<string>() { "Выход", "Exit" };
         static List<string> help = new List<string>() { "Справка", "Help" };
         static List<string> aboutTheProgram = new List<string>() { "О программе", "About the program" };
-        static List<string> userManual = new List<string>() { "Руководство пользователя", "User Manual" };
+        static List<string> userManual = new List<string>() { "Руководство пользователя", "User manual" };
         static List<string> language = new List<string>() { "Язык", "Language" };
         static List<string> shareSecret = new List<string>() { "Разделить секрет", "Share a secret:" };
         static List<string> enterSecret = new List<string>() { "Введите секрет :", "Enter the secret :" };
@@ -67,7 +67,7 @@ namespace SeparationSecret
         public static List<string> version = new List<string>() { "Версия:", "Version:" };
         public static List<string> developers = new List<string>() { "Разработчики:", "Developers:" };
 
-        public static List<string> supportService = new List<string>() { "Служба поддержки", "Support Service" };
+        public static List<string> supportService = new List<string>() { "Служба поддержки", "Support service" };
 
         private void файлToolStripMenuItem1_Click(object sender, EventArgs e)
         {
