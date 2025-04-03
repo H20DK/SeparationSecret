@@ -56,22 +56,26 @@
             // linkLabel1
             // 
             linkLabel1.AutoSize = true;
+            linkLabel1.LinkArea = new LinkArea(0, 195);
             linkLabel1.Location = new Point(32, 80);
             linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(590, 15);
+            linkLabel1.Size = new Size(600, 21);
             linkLabel1.TabIndex = 2;
             linkLabel1.TabStop = true;
             linkLabel1.Text = "https://prettyform.addxt.com/a/form/vf/1FAIpQLSeI7SxYJwp-PJKN1jwHgSywXkZPktqzoH9LNQdA1k2WYFJTxw";
+            linkLabel1.UseCompatibleTextRendering = true;
+            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
             // 
             // linkLabel2
             // 
             linkLabel2.AutoSize = true;
             linkLabel2.Location = new Point(32, 39);
             linkLabel2.Name = "linkLabel2";
-            linkLabel2.Size = new Size(60, 15);
+            linkLabel2.Size = new Size(588, 15);
             linkLabel2.TabIndex = 3;
             linkLabel2.TabStop = true;
-            linkLabel2.Text = "linkLabel2";
+            linkLabel2.Text = "https://docs.google.com/document/d/12dK_yiAcZFVvbH_JgJBSKkVLysH0c_7P0_g7xwjcRfI/edit?usp=drive_link";
+            linkLabel2.LinkClicked += linkLabel2_LinkClicked;
             // 
             // users_guide
             // 

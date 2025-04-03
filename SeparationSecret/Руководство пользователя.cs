@@ -12,7 +12,7 @@ namespace SeparationSecret
 {
     public partial class users_guide : Form
     {
-       public users_guide(string user_manual,string feedback)
+        public users_guide(string user_manual, string feedback)
         {
             InitializeComponent();
             label1.Text = user_manual;
@@ -28,6 +28,49 @@ namespace SeparationSecret
         {
             ClientSize = new System.Drawing.Size(700, 200);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                // Открываем URL в браузере по умолчанию
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = linkLabel1.Text,
+                    UseShellExecute = true
+                });
+                // Устанавливаем ссылку как "посещенную" (меняет цвет, если настроено)
+                linkLabel1.LinkVisited = true;
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                // Открываем URL в браузере по умолчанию
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = linkLabel2.Text,
+                    UseShellExecute = true
+                });
+                // Устанавливаем ссылку как "посещенную" (меняет цвет, если настроено)
+                linkLabel1.LinkVisited = true;
+            }
+            catch
+            {
+
+            }
         }
     }
 }
