@@ -12,9 +12,11 @@ namespace SeparationSecret
 {
     public partial class users_guide : Form
     {
-        public users_guide()
+       public users_guide(string user_manual,string feedback)
         {
             InitializeComponent();
+            label1.Text = user_manual;
+            label2.Text = feedback;
         }
 
         private void label1_Click(object sender, EventArgs e)

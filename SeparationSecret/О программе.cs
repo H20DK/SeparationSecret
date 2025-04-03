@@ -12,9 +12,11 @@ namespace SeparationSecret
 {
     public partial class about_the_program : Form
     {
-        public about_the_program()
+        public about_the_program(string v, string d)
         {
             InitializeComponent();
+            label4.Text = v;
+            label3.Text = d;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

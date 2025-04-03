@@ -111,14 +111,16 @@ namespace SeparationSecret
             // русскийToolStripMenuItem
             // 
             русскийToolStripMenuItem.Name = "русскийToolStripMenuItem";
-            русскийToolStripMenuItem.Size = new Size(119, 22);
+            русскийToolStripMenuItem.Size = new Size(180, 22);
             русскийToolStripMenuItem.Text = "Русский";
+            русскийToolStripMenuItem.Click += русскийToolStripMenuItem_Click;
             // 
             // английскийToolStripMenuItem
             // 
             английскийToolStripMenuItem.Name = "английскийToolStripMenuItem";
-            английскийToolStripMenuItem.Size = new Size(119, 22);
+            английскийToolStripMenuItem.Size = new Size(180, 22);
             английскийToolStripMenuItem.Text = "English";
+            английскийToolStripMenuItem.Click += английскийToolStripMenuItem_Click_1;
             // 
             // label2
             // 
@@ -307,7 +309,7 @@ namespace SeparationSecret
 
         private void руководствоПользователяToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            users_guide users_guide = new users_guide();
+            users_guide users_guide = new users_guide(userManual[Nlanguage], supportService[Nlanguage]);
             users_guide.ShowDialog();
         }
 
