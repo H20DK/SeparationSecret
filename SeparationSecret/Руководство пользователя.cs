@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SecretSharing;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,8 @@ namespace SeparationSecret
         public users_guide(string user_manual, string feedback)
         {
             InitializeComponent();
+            Program.RegisterForm(this); // Регистрируем форму
+
             label1.Text = user_manual;
             label2.Text = feedback;
         }

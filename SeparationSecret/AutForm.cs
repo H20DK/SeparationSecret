@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SecretSharing;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -45,6 +46,7 @@ namespace SeparationSecret
         public AutForm()
         {
             InitializeComponent();
+            Program.RegisterForm(this); // Регистрируем форму
         }
 
         static List<string> file = new List<string>() { "Файл", "File" };

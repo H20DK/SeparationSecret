@@ -6,6 +6,7 @@ namespace SecretSharing
 {
     static class Program
     {
+        private static List<Form> openForms = new List<Form>();
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -15,12 +16,28 @@ namespace SecretSharing
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // Запускаем первую форму, но не привязываем к ней жизненный цикл приложения
             AutForm AutForm = new AutForm();
+            openForms.Add(AutForm);
+            AutForm.FormClosed += (s, e) => CheckForOpenForms();
             AutForm.Show();
 
-            // Запускаем цикл приложения без привязки к конкретной форме
             Application.Run();
         }
+
+        private static void CheckForOpenForms()
+        {
+            openForms.RemoveAll(form => form.IsDisposed);
+            if (openForms.Count == 0)
+            {
+                Application.Exit();
+            }
+        }
+
+        public static void RegisterForm(Form form)
+        {
+            openForms.Add(form);
+            form.FormClosed += (s, e) => CheckForOpenForms();
+        }
     }
+    
 }

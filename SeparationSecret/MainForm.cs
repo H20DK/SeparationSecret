@@ -5,6 +5,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Net.Sockets;
 using System.Text;
+using SecretSharing;
 
 namespace SeparationSecret
 {
@@ -42,6 +43,7 @@ namespace SeparationSecret
         public MainForm()
         {
             InitializeComponent();
+            Program.RegisterForm(this); // Регистрируем форму
 
             // Настройка HelpProvider
             helpProvider = new HelpProvider();
