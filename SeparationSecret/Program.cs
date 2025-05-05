@@ -14,7 +14,13 @@ namespace SecretSharing
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+
+            // Запускаем первую форму, но не привязываем к ней жизненный цикл приложения
+            AutForm AutForm = new AutForm();
+            AutForm.Show();
+
+            // Запускаем цикл приложения без привязки к конкретной форме
+            Application.Run();
         }
     }
 }
