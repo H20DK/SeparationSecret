@@ -44,6 +44,7 @@
             button1 = new Button();
             button2 = new Button();
             textBox1 = new TextBox();
+            helpProvider = new HelpProvider();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -180,6 +181,10 @@
             textBox1.Size = new Size(100, 23);
             textBox1.TabIndex = 19;
             // 
+            // helpProvider
+            // 
+            helpProvider.HelpNamespace = "SeparationSecretHelp.chm";
+            // 
             // AutForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -200,6 +205,7 @@
             Name = "AutForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Separation Secret";
+            Load += AutForm_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
@@ -224,5 +230,6 @@
         private Button button1;
         private Button button2;
         private TextBox textBox1;
+        private HelpProvider helpProvider;
     }
 }
