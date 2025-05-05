@@ -42,6 +42,35 @@ namespace SeparationSecret
         public MainForm()
         {
             InitializeComponent();
+
+            // Настройка HelpProvider
+            helpProvider = new HelpProvider();
+            // Используем относительный путь к CHM-файлу
+            string helpFilePath = Path.Combine(Application.StartupPath, "SeparationSecretHelp.chm");
+            helpProvider.HelpNamespace = helpFilePath;
+            helpProvider.SetHelpNavigator(this, HelpNavigator.TableOfContents);
+
+            // Включение обработки клавиш на уровне формы
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(Form1_KeyDown);
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Проверка нажатия клавиши F1
+            if (e.KeyCode == Keys.F1)
+            {
+                string helpFilePath = Path.Combine(Application.StartupPath, "SeparationSecretHelp.chm");
+                if (File.Exists(helpFilePath))
+                {
+                    Help.ShowHelp(this, helpFilePath);
+                }
+                else
+                {
+                    MessageBox.Show($"Файл справки не найден по пути: {helpFilePath}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                e.Handled = true; // Отмечаем событие как обработанное
+            }
         }
 
         static List<string> file = new List<string>() { "Файл", "File" };

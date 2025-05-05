@@ -54,6 +54,7 @@ namespace SeparationSecret
             textBox5 = new TextBox();
             textBox6 = new TextBox();
             textBox7 = new TextBox();
+            helpProvider = new HelpProvider();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -111,14 +112,14 @@ namespace SeparationSecret
             // русскийToolStripMenuItem
             // 
             русскийToolStripMenuItem.Name = "русскийToolStripMenuItem";
-            русскийToolStripMenuItem.Size = new Size(180, 22);
+            русскийToolStripMenuItem.Size = new Size(119, 22);
             русскийToolStripMenuItem.Text = "Русский";
             русскийToolStripMenuItem.Click += русскийToolStripMenuItem_Click;
             // 
             // английскийToolStripMenuItem
             // 
             английскийToolStripMenuItem.Name = "английскийToolStripMenuItem";
-            английскийToolStripMenuItem.Size = new Size(180, 22);
+            английскийToolStripMenuItem.Size = new Size(119, 22);
             английскийToolStripMenuItem.Text = "English";
             английскийToolStripMenuItem.Click += английскийToolStripMenuItem_Click_1;
             // 
@@ -270,6 +271,10 @@ namespace SeparationSecret
             textBox7.TabIndex = 27;
             textBox7.TextChanged += textBox7_TextChanged;
             // 
+            // helpProvider
+            // 
+            helpProvider.HelpNamespace = "SeparationSecretHelp.chm";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -340,5 +345,6 @@ namespace SeparationSecret
         private TextBox textBox5;
         private TextBox textBox6;
         private TextBox textBox7;
+        private HelpProvider helpProvider;
     }
 }
