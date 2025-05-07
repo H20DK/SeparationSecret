@@ -1,6 +1,7 @@
-﻿namespace SeparationSecret
+﻿
+namespace SeparationSecret
 {
-    partial class AutForm
+    partial class RegForm
     {
         /// <summary>
         /// Required designer variable.
@@ -37,14 +38,19 @@
             языкToolStripMenuItem = new ToolStripMenuItem();
             русскийToolStripMenuItem = new ToolStripMenuItem();
             englishToolStripMenuItem = new ToolStripMenuItem();
+            helpProvider = new HelpProvider();
+            label = new Label();
             label1 = new Label();
             label2 = new Label();
-            label = new Label();
             textBox2 = new TextBox();
-            button1 = new Button();
-            button2 = new Button();
             textBox1 = new TextBox();
-            helpProvider = new HelpProvider();
+            textBox3 = new TextBox();
+            label3 = new Label();
+            button2 = new Button();
+            label4 = new Label();
+            textBox4 = new TextBox();
+            textBox5 = new TextBox();
+            label5 = new Label();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -113,110 +119,160 @@
             englishToolStripMenuItem.Text = "English";
             englishToolStripMenuItem.Click += englishToolStripMenuItem_Click;
             // 
-            // label1
+            // helpProvider
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(260, 73);
-            label1.Name = "label1";
-            label1.Size = new Size(41, 15);
-            label1.TabIndex = 3;
-            label1.Text = "Логин";
-            label1.Click += label1_Click;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(260, 117);
-            label2.Name = "label2";
-            label2.Size = new Size(49, 15);
-            label2.TabIndex = 4;
-            label2.Text = "Пароль";
+            helpProvider.HelpNamespace = "SeparationSecretHelp.chm";
             // 
             // label
             // 
             label.AutoSize = true;
-            label.Location = new Point(260, 46);
+            label.Location = new Point(201, 63);
             label.Name = "label";
-            label.Size = new Size(182, 15);
-            label.TabIndex = 5;
-            label.Text = "Пожалуйста, войдите в систему";
-            label.Click += label3_Click;
+            label.Size = new Size(76, 15);
+            label.TabIndex = 6;
+            label.Text = "Регистрация";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(201, 102);
+            label1.Name = "label1";
+            label1.Size = new Size(63, 15);
+            label1.TabIndex = 7;
+            label1.Text = "Фамилия*";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(201, 150);
+            label2.Name = "label2";
+            label2.Size = new Size(36, 15);
+            label2.TabIndex = 8;
+            label2.Text = "Имя*";
             // 
             // textBox2
             // 
             textBox2.BackColor = SystemColors.Menu;
-            textBox2.Location = new Point(280, 91);
+            textBox2.Location = new Point(201, 120);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(100, 23);
-            textBox2.TabIndex = 16;
+            textBox2.TabIndex = 17;
             // 
-            // button1
+            // textBox1
             // 
-            button1.BackColor = SystemColors.Menu;
-            button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            button1.Location = new Point(260, 186);
-            button1.Name = "button1";
-            button1.Size = new Size(182, 35);
-            button1.TabIndex = 17;
-            button1.Text = "Войти";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click_1;
+            textBox1.BackColor = SystemColors.Menu;
+            textBox1.Location = new Point(201, 180);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(100, 23);
+            textBox1.TabIndex = 20;
+            // 
+            // textBox3
+            // 
+            textBox3.BackColor = SystemColors.Menu;
+            textBox3.Location = new Point(201, 233);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(100, 23);
+            textBox3.TabIndex = 21;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(201, 215);
+            label3.Name = "label3";
+            label3.Size = new Size(141, 15);
+            label3.TabIndex = 22;
+            label3.Text = "Отчество (при наличии)";
             // 
             // button2
             // 
             button2.BackColor = SystemColors.Menu;
             button2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            button2.Location = new Point(260, 248);
+            button2.Location = new Point(302, 288);
             button2.Name = "button2";
             button2.Size = new Size(182, 35);
-            button2.TabIndex = 18;
+            button2.TabIndex = 23;
             button2.Text = "Зарегистрироваться";
             button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
             // 
-            // textBox1
+            // label4
             // 
-            textBox1.BackColor = SystemColors.Menu;
-            textBox1.Location = new Point(280, 135);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 19;
+            label4.AutoSize = true;
+            label4.Location = new Point(443, 165);
+            label4.Name = "label4";
+            label4.Size = new Size(123, 15);
+            label4.TabIndex = 24;
+            label4.Text = "Придумайте пароль*";
             // 
-            // helpProvider
+            // textBox4
             // 
-            helpProvider.HelpNamespace = "SeparationSecretHelp.chm";
+            textBox4.BackColor = SystemColors.Menu;
+            textBox4.Location = new Point(443, 196);
+            textBox4.Name = "textBox4";
+            textBox4.Size = new Size(100, 23);
+            textBox4.TabIndex = 25;
             // 
-            // AutForm
+            // textBox5
+            // 
+            textBox5.BackColor = SystemColors.Menu;
+            textBox5.Location = new Point(443, 120);
+            textBox5.Name = "textBox5";
+            textBox5.Size = new Size(100, 23);
+            textBox5.TabIndex = 27;
+            textBox5.TextChanged += textBox5_TextChanged;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(443, 89);
+            label5.Name = "label5";
+            label5.Size = new Size(116, 15);
+            label5.TabIndex = 26;
+            label5.Text = "Придумайте логин*";
+            label5.Click += label5_Click;
+            // 
+            // RegForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(828, 458);
-            Controls.Add(textBox1);
+            Controls.Add(textBox5);
+            Controls.Add(label5);
+            Controls.Add(textBox4);
+            Controls.Add(label4);
             Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(label3);
+            Controls.Add(textBox3);
+            Controls.Add(textBox1);
             Controls.Add(textBox2);
-            Controls.Add(label);
             Controls.Add(label2);
             Controls.Add(label1);
+            Controls.Add(label);
             Controls.Add(menuStrip1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MainMenuStrip = menuStrip1;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "AutForm";
+            Name = "RegForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Separation Secret";
-            Load += AutForm_Load;
+            Load += RegForm_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
+        private void label5_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         private MenuStrip menuStrip1;
+        private HelpProvider helpProvider;
         private ToolStripMenuItem файлToolStripMenuItem;
         private ToolStripMenuItem выходToolStripMenuItem;
         private ToolStripMenuItem справкаToolStripMenuItem;
@@ -225,13 +281,17 @@
         private ToolStripMenuItem руководствоПользователяToolStripMenuItem;
         private ToolStripMenuItem русскийToolStripMenuItem;
         private ToolStripMenuItem englishToolStripMenuItem;
+        private Label label;
         private Label label1;
         private Label label2;
-        private Label label;
         private TextBox textBox2;
-        private Button button1;
-        private Button button2;
         private TextBox textBox1;
-        private HelpProvider helpProvider;
+        private TextBox textBox3;
+        private Label label3;
+        private Button button2;
+        private Label label4;
+        private TextBox textBox4;
+        private TextBox textBox5;
+        private Label label5;
     }
 }

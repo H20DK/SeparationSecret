@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Numerics;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +12,7 @@ using System.Windows.Forms;
 
 namespace SeparationSecret
 {
-    public partial class AutForm : Form
+    public partial class RegForm : Form
     {
         public static int NumberLanguage = 0;
         int Nlanguage
@@ -34,7 +33,7 @@ namespace SeparationSecret
                 руководствоПользователяToolStripMenuItem.Text = userManual[Nlanguage];
                 языкToolStripMenuItem.Text = language[Nlanguage];
 
-                button1.Text = Signin[Nlanguage];
+                
                 button2.Text = Signup[Nlanguage];
 
                 label2.Text = Password[Nlanguage];
@@ -43,9 +42,10 @@ namespace SeparationSecret
 
             }
         }
-        public AutForm()
+        public RegForm()
         {
             InitializeComponent();
+
             Program.RegisterForm(this); // Регистрируем форму
 
             // Настройка HelpProvider
@@ -78,7 +78,6 @@ namespace SeparationSecret
             }
         }
 
-
         static List<string> file = new List<string>() { "Файл", "File" };
         static List<string> output = new List<string>() { "Выход", "Exit" };
         static List<string> help = new List<string>() { "Справка", "Help" };
@@ -107,6 +106,10 @@ namespace SeparationSecret
         public static List<string> errorCalculate = new List<string>() { "Такое программа посчитать не может", "The program cannot calculate this" };
         public static List<string> errorLoadLanguage = new List<string>() { "Ошибка в количестве строк в языковом файле", "Error in the number of lines in the language file" };
 
+        private void RegForm_Load(object sender, EventArgs e)
+        {
+
+        }
 
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -135,37 +138,15 @@ namespace SeparationSecret
             Nlanguage = 1;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            MainForm MainForm = new MainForm();
-            MainForm.Show();
-            this.Close();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AutForm_Load(object sender, EventArgs e)
+        private void textBox5_TextChanged(object sender, EventArgs e)
         {
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            RegForm RegForm = new RegForm();
-            RegForm.Show();
+            MainForm MainForm = new MainForm();
+            MainForm.Show();
             this.Close();
         }
     }

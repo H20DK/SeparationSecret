@@ -298,6 +298,7 @@ namespace SeparationSecret
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(menuStrip1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MainMenuStrip = menuStrip1;
             Margin = new Padding(3, 2, 3, 2);
             MaximizeBox = false;
