@@ -40,10 +40,10 @@
             label1 = new Label();
             label2 = new Label();
             label = new Label();
-            textBox2 = new TextBox();
+            txtLogin = new TextBox();
             button1 = new Button();
             button2 = new Button();
-            textBox1 = new TextBox();
+            txtPassword = new TextBox();
             helpProvider = new HelpProvider();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -142,13 +142,13 @@
             label.Text = "Пожалуйста, войдите в систему";
             label.Click += label3_Click;
             // 
-            // textBox2
+            // txtLogin
             // 
-            textBox2.BackColor = SystemColors.Menu;
-            textBox2.Location = new Point(280, 91);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(100, 23);
-            textBox2.TabIndex = 16;
+            txtLogin.BackColor = SystemColors.Menu;
+            txtLogin.Location = new Point(280, 91);
+            txtLogin.Name = "txtLogin";
+            txtLogin.Size = new Size(100, 23);
+            txtLogin.TabIndex = 16;
             // 
             // button1
             // 
@@ -174,13 +174,13 @@
             button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
             // 
-            // textBox1
+            // txtPassword
             // 
-            textBox1.BackColor = SystemColors.Menu;
-            textBox1.Location = new Point(280, 135);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 19;
+            txtPassword.BackColor = SystemColors.Menu;
+            txtPassword.Location = new Point(280, 135);
+            txtPassword.Name = "txtPassword";
+            txtPassword.Size = new Size(100, 23);
+            txtPassword.TabIndex = 19;
             // 
             // helpProvider
             // 
@@ -192,10 +192,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(828, 458);
-            Controls.Add(textBox1);
+            Controls.Add(txtPassword);
             Controls.Add(button2);
             Controls.Add(button1);
-            Controls.Add(textBox2);
+            Controls.Add(txtLogin);
             Controls.Add(label);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -228,10 +228,10 @@
         private Label label1;
         private Label label2;
         private Label label;
-        private TextBox textBox2;
+        private TextBox txtLogin;
         private Button button1;
         private Button button2;
-        private TextBox textBox1;
+        private TextBox txtPassword;
         private HelpProvider helpProvider;
     }
 }

@@ -147,9 +147,60 @@ namespace SeparationSecret
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            MainForm MainForm = new MainForm();
-            MainForm.Show();
-            this.Close();
+            try
+            {
+                // Получаем введённые логин и пароль
+                string login = txtLogin.Text;
+                string password = txtPassword.Text;
+
+                // Проверяем, что поля не пустые
+                if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(password))
+                {
+                    MessageBox.Show("Пожалуйста, введите логин и пароль.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Проверяем, существует ли файл Log.txt
+                string filePath = Path.Combine(Application.StartupPath, "Log.txt");
+                if (!File.Exists(filePath))
+                {
+                    MessageBox.Show("Файл с данными пользователей не найден. Пожалуйста, зарегистрируйтесь.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Читаем все строки из файла
+                string[] lines = File.ReadAllLines(filePath);
+                bool userFound = false;
+
+                // Ищем пользователя с совпадением логина и пароля
+                foreach (string line in lines)
+                {
+                    if (line.Contains($"Login: {login}, Password: {password}"))
+                    {
+                        userFound = true;
+                        break;
+                    }
+                }
+
+                // Проверяем результат
+                if (userFound)
+                {
+                    MessageBox.Show("Вход успешно выполнен!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Открываем основную форму
+                    MainForm mainForm = new MainForm();
+                    mainForm.Show();
+                    this.Close(); // Закрываем форму входа
+                }
+                else
+                {
+                    MessageBox.Show("Неверный логин или пароль.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при проверке данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }            
         }
 
         private void label1_Click(object sender, EventArgs e)

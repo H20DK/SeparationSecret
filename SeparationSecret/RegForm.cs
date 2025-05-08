@@ -9,6 +9,7 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace SeparationSecret
 {
@@ -145,6 +146,45 @@ namespace SeparationSecret
 
         private void button2_Click(object sender, EventArgs e)
         {
+            try
+            {
+                // Получаем данные из полей ввода
+                string login = txtLogin.Text;
+                string name = txtName.Text;
+                string surname = txtSurname.Text;
+                string password = txtPassword.Text;
+                string patronymic = txtPatronymic.Text;
+
+                // Проверяем, что обязательные поля заполнены
+                if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(name) ||
+                    string.IsNullOrWhiteSpace(surname) || string.IsNullOrWhiteSpace(password))
+                {
+                    MessageBox.Show("Пожалуйста, заполните все обязательные поля (*).", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Формируем строку для записи
+                string userData = $"Login: {login}, Password: {password}, Surname: {surname} Name: {name}, Patronymic: {patronymic}\n";
+
+                // Сохраняем данные в файл Log.txt
+                string filePath = Path.Combine(Application.StartupPath, "Log.txt");
+                File.AppendAllText(filePath, userData); // Используем AppendAllText для добавления новых записей
+
+                MessageBox.Show("Пользователь успешно зарегистрирован.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Очищаем поля после успешной регистрации (опционально)
+                txtLogin.Clear();
+                txtName.Clear();
+                txtSurname.Clear();
+                txtPassword.Clear();
+                txtPatronymic.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
             MainForm MainForm = new MainForm();
             MainForm.Show();
             this.Close();

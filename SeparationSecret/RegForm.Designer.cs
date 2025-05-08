@@ -42,14 +42,14 @@ namespace SeparationSecret
             label = new Label();
             label1 = new Label();
             label2 = new Label();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
-            textBox3 = new TextBox();
+            txtSurname = new TextBox();
+            txtName = new TextBox();
+            txtPatronymic = new TextBox();
             label3 = new Label();
             button2 = new Button();
             label4 = new Label();
-            textBox4 = new TextBox();
-            textBox5 = new TextBox();
+            txtPassword = new TextBox();
+            txtLogin = new TextBox();
             label5 = new Label();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -150,29 +150,29 @@ namespace SeparationSecret
             label2.TabIndex = 8;
             label2.Text = "Имя*";
             // 
-            // textBox2
+            // txtSurname
             // 
-            textBox2.BackColor = SystemColors.Menu;
-            textBox2.Location = new Point(201, 120);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(100, 23);
-            textBox2.TabIndex = 17;
+            txtSurname.BackColor = SystemColors.Menu;
+            txtSurname.Location = new Point(201, 120);
+            txtSurname.Name = "txtSurname";
+            txtSurname.Size = new Size(100, 23);
+            txtSurname.TabIndex = 17;
             // 
-            // textBox1
+            // txtName
             // 
-            textBox1.BackColor = SystemColors.Menu;
-            textBox1.Location = new Point(201, 180);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 20;
+            txtName.BackColor = SystemColors.Menu;
+            txtName.Location = new Point(201, 180);
+            txtName.Name = "txtName";
+            txtName.Size = new Size(100, 23);
+            txtName.TabIndex = 20;
             // 
-            // textBox3
+            // txtPatronymic
             // 
-            textBox3.BackColor = SystemColors.Menu;
-            textBox3.Location = new Point(201, 233);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(100, 23);
-            textBox3.TabIndex = 21;
+            txtPatronymic.BackColor = SystemColors.Menu;
+            txtPatronymic.Location = new Point(201, 233);
+            txtPatronymic.Name = "txtPatronymic";
+            txtPatronymic.Size = new Size(100, 23);
+            txtPatronymic.TabIndex = 21;
             // 
             // label3
             // 
@@ -204,22 +204,22 @@ namespace SeparationSecret
             label4.TabIndex = 24;
             label4.Text = "Придумайте пароль*";
             // 
-            // textBox4
+            // txtPassword
             // 
-            textBox4.BackColor = SystemColors.Menu;
-            textBox4.Location = new Point(443, 196);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(100, 23);
-            textBox4.TabIndex = 25;
+            txtPassword.BackColor = SystemColors.Menu;
+            txtPassword.Location = new Point(443, 196);
+            txtPassword.Name = "txtPassword";
+            txtPassword.Size = new Size(100, 23);
+            txtPassword.TabIndex = 25;
             // 
-            // textBox5
+            // txtLogin
             // 
-            textBox5.BackColor = SystemColors.Menu;
-            textBox5.Location = new Point(443, 120);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(100, 23);
-            textBox5.TabIndex = 27;
-            textBox5.TextChanged += textBox5_TextChanged;
+            txtLogin.BackColor = SystemColors.Menu;
+            txtLogin.Location = new Point(443, 120);
+            txtLogin.Name = "txtLogin";
+            txtLogin.Size = new Size(100, 23);
+            txtLogin.TabIndex = 27;
+            txtLogin.TextChanged += textBox5_TextChanged;
             // 
             // label5
             // 
@@ -237,15 +237,15 @@ namespace SeparationSecret
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(828, 458);
-            Controls.Add(textBox5);
+            Controls.Add(txtLogin);
             Controls.Add(label5);
-            Controls.Add(textBox4);
+            Controls.Add(txtPassword);
             Controls.Add(label4);
             Controls.Add(button2);
             Controls.Add(label3);
-            Controls.Add(textBox3);
-            Controls.Add(textBox1);
-            Controls.Add(textBox2);
+            Controls.Add(txtPatronymic);
+            Controls.Add(txtName);
+            Controls.Add(txtSurname);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(label);
@@ -284,14 +284,14 @@ namespace SeparationSecret
         private Label label;
         private Label label1;
         private Label label2;
-        private TextBox textBox2;
-        private TextBox textBox1;
-        private TextBox textBox3;
+        private TextBox txtSurname;
+        private TextBox txtName;
+        private TextBox txtPatronymic;
         private Label label3;
         private Button button2;
         private Label label4;
-        private TextBox textBox4;
-        private TextBox textBox5;
+        private TextBox txtPassword;
+        private TextBox txtLogin;
         private Label label5;
     }
 }
