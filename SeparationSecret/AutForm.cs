@@ -80,7 +80,7 @@ namespace SeparationSecret
 
 
         static List<string> file = new List<string>() { "Файл", "File" };
-        static List<string> output = new List<string>() { "Выход", "Exit" };
+        static List<string> output = new List<string>() { "Выход из приложения", "Exit" };
         static List<string> help = new List<string>() { "Справка", "Help" };
         static List<string> aboutTheProgram = new List<string>() { "О программе", "About the program" };
         static List<string> userManual = new List<string>() { "Руководство пользователя", "User manual" };

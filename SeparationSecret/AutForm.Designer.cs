@@ -67,8 +67,8 @@
             // выходToolStripMenuItem
             // 
             выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            выходToolStripMenuItem.Size = new Size(108, 22);
-            выходToolStripMenuItem.Text = "Выход";
+            выходToolStripMenuItem.Size = new Size(196, 22);
+            выходToolStripMenuItem.Text = "Выход из приложения";
             выходToolStripMenuItem.Click += выходToolStripMenuItem_Click;
             // 
             // справкаToolStripMenuItem
@@ -102,14 +102,14 @@
             // русскийToolStripMenuItem
             // 
             русскийToolStripMenuItem.Name = "русскийToolStripMenuItem";
-            русскийToolStripMenuItem.Size = new Size(119, 22);
+            русскийToolStripMenuItem.Size = new Size(180, 22);
             русскийToolStripMenuItem.Text = "Русский";
             русскийToolStripMenuItem.Click += русскийToolStripMenuItem_Click;
             // 
             // englishToolStripMenuItem
             // 
             englishToolStripMenuItem.Name = "englishToolStripMenuItem";
-            englishToolStripMenuItem.Size = new Size(119, 22);
+            englishToolStripMenuItem.Size = new Size(180, 22);
             englishToolStripMenuItem.Text = "English";
             englishToolStripMenuItem.Click += englishToolStripMenuItem_Click;
             // 

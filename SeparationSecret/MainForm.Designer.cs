@@ -31,6 +31,7 @@ namespace SeparationSecret
         {
             menuStrip1 = new MenuStrip();
             файлToolStripMenuItem = new ToolStripMenuItem();
+            выходИзАккаунтаToolStripMenuItem = new ToolStripMenuItem();
             файлToolStripMenuItem1 = new ToolStripMenuItem();
             справкаToolStripMenuItem = new ToolStripMenuItem();
             оПрограммеToolStripMenuItem = new ToolStripMenuItem();
@@ -69,16 +70,23 @@ namespace SeparationSecret
             // 
             // файлToolStripMenuItem
             // 
-            файлToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { файлToolStripMenuItem1 });
+            файлToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { выходИзАккаунтаToolStripMenuItem, файлToolStripMenuItem1 });
             файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             файлToolStripMenuItem.Size = new Size(48, 20);
             файлToolStripMenuItem.Text = "Файл";
             // 
+            // выходИзАккаунтаToolStripMenuItem
+            // 
+            выходИзАккаунтаToolStripMenuItem.Name = "выходИзАккаунтаToolStripMenuItem";
+            выходИзАккаунтаToolStripMenuItem.Size = new Size(196, 22);
+            выходИзАккаунтаToolStripMenuItem.Text = "Выход из аккаунта";
+            выходИзАккаунтаToolStripMenuItem.Click += выходИзАккаунтаToolStripMenuItem_Click;
+            // 
             // файлToolStripMenuItem1
             // 
             файлToolStripMenuItem1.Name = "файлToolStripMenuItem1";
-            файлToolStripMenuItem1.Size = new Size(108, 22);
-            файлToolStripMenuItem1.Text = "Выход";
+            файлToolStripMenuItem1.Size = new Size(196, 22);
+            файлToolStripMenuItem1.Text = "Выход из приложения";
             файлToolStripMenuItem1.Click += файлToolStripMenuItem1_Click;
             // 
             // справкаToolStripMenuItem
@@ -347,5 +355,6 @@ namespace SeparationSecret
         private TextBox textBox6;
         private TextBox textBox7;
         private HelpProvider helpProvider;
+        private ToolStripMenuItem выходИзАккаунтаToolStripMenuItem;
     }
 }

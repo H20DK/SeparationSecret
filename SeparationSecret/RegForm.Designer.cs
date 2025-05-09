@@ -73,8 +73,8 @@ namespace SeparationSecret
             // выходToolStripMenuItem
             // 
             выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            выходToolStripMenuItem.Size = new Size(108, 22);
-            выходToolStripMenuItem.Text = "Выход";
+            выходToolStripMenuItem.Size = new Size(196, 22);
+            выходToolStripMenuItem.Text = "Выход из приложения";
             выходToolStripMenuItem.Click += выходToolStripMenuItem_Click;
             // 
             // справкаToolStripMenuItem

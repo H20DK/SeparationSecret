@@ -25,6 +25,7 @@ namespace SeparationSecret
 
                 файлToolStripMenuItem.Text = file[Nlanguage];
                 файлToolStripMenuItem1.Text = output[Nlanguage];
+                выходИзАккаунтаToolStripMenuItem.Text = output2[Nlanguage];
                 справкаToolStripMenuItem.Text = help[Nlanguage];
                 оПрограммеToolStripMenuItem.Text = aboutTheProgram[Nlanguage];
                 руководствоПользователяToolStripMenuItem.Text = userManual[Nlanguage];
@@ -76,7 +77,8 @@ namespace SeparationSecret
         }
 
         static List<string> file = new List<string>() { "Файл", "File" };
-        static List<string> output = new List<string>() { "Выход", "Exit" };
+        static List<string> output = new List<string>() { "Выход из приложения", "Exiting the app" };
+        static List<string> output2 = new List<string>() { "Выход из аккаунта", "Exit from account" };
         static List<string> help = new List<string>() { "Справка", "Help" };
         static List<string> aboutTheProgram = new List<string>() { "О программе", "About the program" };
         static List<string> userManual = new List<string>() { "Руководство пользователя", "User manual" };
@@ -174,6 +176,13 @@ namespace SeparationSecret
         private void английскийToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             Nlanguage = 1;
+        }
+
+        private void выходИзАккаунтаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AutForm AutForm = new AutForm();
+            AutForm.Show();
+            this.Close();
         }
     }
 }
