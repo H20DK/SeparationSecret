@@ -46,7 +46,7 @@ namespace SeparationSecret
         public RegForm()
         {
             InitializeComponent();
-
+            EnsureHelpFileExists(); // Извлекаем файл справки
             Program.RegisterForm(this); // Регистрируем форму
 
             // Настройка HelpProvider
@@ -59,6 +59,15 @@ namespace SeparationSecret
             // Включение обработки клавиш на уровне формы
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(Form1_KeyDown);
+        }
+
+        private void EnsureHelpFileExists()
+        {
+            string helpFilePath = Path.Combine(Application.StartupPath, "SeparationSecretHelp.chm");
+            if (!File.Exists(helpFilePath))
+            {
+                File.WriteAllBytes(helpFilePath, Properties.Resources.HelpFile); // Извлекаем из ресурсов
+            }
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
