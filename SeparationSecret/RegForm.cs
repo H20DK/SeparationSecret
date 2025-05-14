@@ -52,7 +52,7 @@ namespace SeparationSecret
             // Настройка HelpProvider
             helpProvider = new HelpProvider();
             // Используем относительный путь к CHM-файлу
-            string helpFilePath = Path.Combine(Application.StartupPath, "SeparationSecretHelp.chm");
+            string helpFilePath = Path.Combine(Application.StartupPath, "Properties", "SeparationSecretHelp.chm");
             helpProvider.HelpNamespace = helpFilePath;
             helpProvider.SetHelpNavigator(this, HelpNavigator.TableOfContents);
 
@@ -63,7 +63,7 @@ namespace SeparationSecret
 
         private void EnsureHelpFileExists()
         {
-            string helpFilePath = Path.Combine(Application.StartupPath, "SeparationSecretHelp.chm");
+            string helpFilePath = Path.Combine(Application.StartupPath, "Properties", "SeparationSecretHelp.chm");
             if (!File.Exists(helpFilePath))
             {
                 File.WriteAllBytes(helpFilePath, Properties.Resources.HelpFile); // Извлекаем из ресурсов
@@ -75,7 +75,7 @@ namespace SeparationSecret
             // Проверка нажатия клавиши F1
             if (e.KeyCode == Keys.F1)
             {
-                string helpFilePath = Path.Combine(Application.StartupPath, "SeparationSecretHelp.chm");
+                string helpFilePath = Path.Combine(Application.StartupPath, "Properties", "SeparationSecretHelp.chm");
                 if (File.Exists(helpFilePath))
                 {
                     Help.ShowHelp(this, helpFilePath, "registratsiya.htm");
