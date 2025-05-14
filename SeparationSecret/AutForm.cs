@@ -68,7 +68,7 @@ namespace SeparationSecret
                 string helpFilePath = Path.Combine(Application.StartupPath, "SeparationSecretHelp.chm");
                 if (File.Exists(helpFilePath))
                 {
-                    Help.ShowHelp(this, helpFilePath);
+                    Help.ShowHelp(this, helpFilePath, "avtorizatsiya.htm");
                 }
                 else
                 {

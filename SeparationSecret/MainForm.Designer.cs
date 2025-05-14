@@ -202,8 +202,11 @@ namespace SeparationSecret
             // 
             button1.BackColor = SystemColors.Menu;
             button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            helpProvider.SetHelpKeyword(button1, "faq.htm");
+            helpProvider.SetHelpNavigator(button1, HelpNavigator.Topic);
             button1.Location = new Point(48, 47);
             button1.Name = "button1";
+            helpProvider.SetShowHelp(button1, true);
             button1.Size = new Size(157, 36);
             button1.TabIndex = 12;
             button1.Text = "Разделить секрет";
@@ -213,68 +216,93 @@ namespace SeparationSecret
             // 
             button2.BackColor = SystemColors.Menu;
             button2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            helpProvider.SetHelpKeyword(button2, "faq.htm");
+            helpProvider.SetHelpNavigator(button2, HelpNavigator.TopicId);
             button2.Location = new Point(239, 259);
             button2.Name = "button2";
+            helpProvider.SetShowHelp(button2, true);
             button2.Size = new Size(181, 33);
             button2.TabIndex = 13;
             button2.Text = "Восстановить секрет";
             button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // textBox2
             // 
             textBox2.BackColor = SystemColors.Menu;
+            helpProvider.SetHelpKeyword(textBox2, "faq.htm");
+            helpProvider.SetHelpNavigator(textBox2, HelpNavigator.TopicId);
             textBox2.Location = new Point(184, 89);
             textBox2.Name = "textBox2";
+            helpProvider.SetShowHelp(textBox2, true);
             textBox2.Size = new Size(100, 23);
             textBox2.TabIndex = 15;
             // 
             // textBox8
             // 
             textBox8.BackColor = SystemColors.Menu;
+            helpProvider.SetHelpKeyword(textBox8, "faq.htm");
+            helpProvider.SetHelpNavigator(textBox8, HelpNavigator.TopicId);
             textBox8.Location = new Point(297, 118);
             textBox8.Name = "textBox8";
+            helpProvider.SetShowHelp(textBox8, true);
             textBox8.Size = new Size(100, 23);
             textBox8.TabIndex = 21;
             // 
             // textBox1
             // 
             textBox1.BackColor = SystemColors.Menu;
+            helpProvider.SetHelpKeyword(textBox1, "faq.htm");
+            helpProvider.SetHelpNavigator(textBox1, HelpNavigator.TopicId);
             textBox1.Location = new Point(537, 151);
             textBox1.Name = "textBox1";
+            helpProvider.SetShowHelp(textBox1, true);
             textBox1.Size = new Size(100, 23);
             textBox1.TabIndex = 22;
             // 
             // textBox4
             // 
             textBox4.BackColor = SystemColors.Menu;
+            helpProvider.SetHelpKeyword(textBox4, "faq.htm");
+            helpProvider.SetHelpNavigator(textBox4, HelpNavigator.TopicId);
             textBox4.Location = new Point(339, 368);
             textBox4.Name = "textBox4";
             textBox4.ReadOnly = true;
+            helpProvider.SetShowHelp(textBox4, true);
             textBox4.Size = new Size(100, 23);
             textBox4.TabIndex = 24;
             // 
             // textBox5
             // 
             textBox5.BackColor = SystemColors.Menu;
+            helpProvider.SetHelpKeyword(textBox5, "faq.htm");
+            helpProvider.SetHelpNavigator(textBox5, HelpNavigator.TopicId);
             textBox5.Location = new Point(405, 331);
             textBox5.Name = "textBox5";
+            helpProvider.SetShowHelp(textBox5, true);
             textBox5.Size = new Size(100, 23);
             textBox5.TabIndex = 25;
             // 
             // textBox6
             // 
             textBox6.BackColor = SystemColors.Menu;
+            helpProvider.SetHelpKeyword(textBox6, "faq.htm");
+            helpProvider.SetHelpNavigator(textBox6, HelpNavigator.TopicId);
             textBox6.Location = new Point(487, 292);
             textBox6.Name = "textBox6";
+            helpProvider.SetShowHelp(textBox6, true);
             textBox6.Size = new Size(100, 23);
             textBox6.TabIndex = 26;
             // 
             // textBox7
             // 
             textBox7.BackColor = SystemColors.Menu;
+            helpProvider.SetHelpKeyword(textBox7, "faq.htm");
+            helpProvider.SetHelpNavigator(textBox7, HelpNavigator.TopicId);
             textBox7.Location = new Point(148, 183);
             textBox7.Name = "textBox7";
             textBox7.ReadOnly = true;
+            helpProvider.SetShowHelp(textBox7, true);
             textBox7.Size = new Size(100, 23);
             textBox7.TabIndex = 27;
             textBox7.TextChanged += textBox7_TextChanged;

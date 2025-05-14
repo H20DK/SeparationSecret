@@ -66,7 +66,7 @@ namespace SeparationSecret
                 string helpFilePath = Path.Combine(Application.StartupPath, "SeparationSecretHelp.chm");
                 if (File.Exists(helpFilePath))
                 {
-                    Help.ShowHelp(this, helpFilePath);
+                    Help.ShowHelp(this, helpFilePath, "osnovnoj_interfejs.htm");
                 }
                 else
                 {
@@ -183,6 +183,11 @@ namespace SeparationSecret
             AutForm AutForm = new AutForm();
             AutForm.Show();
             this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
