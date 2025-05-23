@@ -51,6 +51,7 @@ namespace SeparationSecret
             txtPassword = new TextBox();
             txtLogin = new TextBox();
             label5 = new Label();
+            button1 = new Button();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -126,16 +127,18 @@ namespace SeparationSecret
             // label
             // 
             label.AutoSize = true;
-            label.Location = new Point(201, 63);
+            label.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label.Location = new Point(323, 51);
             label.Name = "label";
-            label.Size = new Size(76, 15);
+            label.Size = new Size(162, 32);
             label.TabIndex = 6;
             label.Text = "Регистрация";
+            label.Click += label_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(201, 102);
+            label1.Location = new Point(216, 121);
             label1.Name = "label1";
             label1.Size = new Size(63, 15);
             label1.TabIndex = 7;
@@ -144,7 +147,7 @@ namespace SeparationSecret
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(201, 150);
+            label2.Location = new Point(216, 181);
             label2.Name = "label2";
             label2.Size = new Size(36, 15);
             label2.TabIndex = 8;
@@ -153,7 +156,7 @@ namespace SeparationSecret
             // txtSurname
             // 
             txtSurname.BackColor = SystemColors.Menu;
-            txtSurname.Location = new Point(201, 120);
+            txtSurname.Location = new Point(240, 139);
             txtSurname.Name = "txtSurname";
             txtSurname.Size = new Size(100, 23);
             txtSurname.TabIndex = 17;
@@ -161,7 +164,7 @@ namespace SeparationSecret
             // txtName
             // 
             txtName.BackColor = SystemColors.Menu;
-            txtName.Location = new Point(201, 180);
+            txtName.Location = new Point(240, 199);
             txtName.Name = "txtName";
             txtName.Size = new Size(100, 23);
             txtName.TabIndex = 20;
@@ -169,7 +172,7 @@ namespace SeparationSecret
             // txtPatronymic
             // 
             txtPatronymic.BackColor = SystemColors.Menu;
-            txtPatronymic.Location = new Point(201, 233);
+            txtPatronymic.Location = new Point(240, 252);
             txtPatronymic.Name = "txtPatronymic";
             txtPatronymic.Size = new Size(100, 23);
             txtPatronymic.TabIndex = 21;
@@ -177,7 +180,7 @@ namespace SeparationSecret
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(201, 215);
+            label3.Location = new Point(216, 234);
             label3.Name = "label3";
             label3.Size = new Size(141, 15);
             label3.TabIndex = 22;
@@ -187,18 +190,18 @@ namespace SeparationSecret
             // 
             button2.BackColor = SystemColors.Menu;
             button2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            button2.Location = new Point(302, 288);
+            button2.Location = new Point(324, 307);
             button2.Name = "button2";
             button2.Size = new Size(182, 35);
             button2.TabIndex = 23;
-            button2.Text = "Зарегистрироваться";
+            button2.Text = "Регистрация";
             button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(443, 165);
+            label4.Location = new Point(431, 181);
             label4.Name = "label4";
             label4.Size = new Size(123, 15);
             label4.TabIndex = 24;
@@ -207,7 +210,7 @@ namespace SeparationSecret
             // txtPassword
             // 
             txtPassword.BackColor = SystemColors.Menu;
-            txtPassword.Location = new Point(443, 196);
+            txtPassword.Location = new Point(454, 199);
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(100, 23);
             txtPassword.TabIndex = 25;
@@ -215,7 +218,7 @@ namespace SeparationSecret
             // txtLogin
             // 
             txtLogin.BackColor = SystemColors.Menu;
-            txtLogin.Location = new Point(443, 120);
+            txtLogin.Location = new Point(454, 139);
             txtLogin.Name = "txtLogin";
             txtLogin.Size = new Size(100, 23);
             txtLogin.TabIndex = 27;
@@ -224,12 +227,24 @@ namespace SeparationSecret
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(443, 89);
+            label5.Location = new Point(431, 121);
             label5.Name = "label5";
             label5.Size = new Size(116, 15);
             label5.TabIndex = 26;
             label5.Text = "Придумайте логин*";
             label5.Click += label5_Click;
+            // 
+            // button1
+            // 
+            button1.BackColor = SystemColors.Menu;
+            button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            button1.Location = new Point(324, 358);
+            button1.Name = "button1";
+            button1.Size = new Size(182, 35);
+            button1.TabIndex = 28;
+            button1.Text = "Авторизация";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // RegForm
             // 
@@ -237,6 +252,7 @@ namespace SeparationSecret
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(828, 458);
+            Controls.Add(button1);
             Controls.Add(txtLogin);
             Controls.Add(label5);
             Controls.Add(txtPassword);
@@ -254,7 +270,6 @@ namespace SeparationSecret
             MainMenuStrip = menuStrip1;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "RegForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Separation Secret";
             Load += RegForm_Load;
@@ -293,5 +308,6 @@ namespace SeparationSecret
         private TextBox txtPassword;
         private TextBox txtLogin;
         private Label label5;
+        private Button button1;
     }
 }

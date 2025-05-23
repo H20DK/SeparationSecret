@@ -102,21 +102,21 @@
             // русскийToolStripMenuItem
             // 
             русскийToolStripMenuItem.Name = "русскийToolStripMenuItem";
-            русскийToolStripMenuItem.Size = new Size(180, 22);
+            русскийToolStripMenuItem.Size = new Size(119, 22);
             русскийToolStripMenuItem.Text = "Русский";
             русскийToolStripMenuItem.Click += русскийToolStripMenuItem_Click;
             // 
             // englishToolStripMenuItem
             // 
             englishToolStripMenuItem.Name = "englishToolStripMenuItem";
-            englishToolStripMenuItem.Size = new Size(180, 22);
+            englishToolStripMenuItem.Size = new Size(119, 22);
             englishToolStripMenuItem.Text = "English";
             englishToolStripMenuItem.Click += englishToolStripMenuItem_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(260, 73);
+            label1.Location = new Point(349, 127);
             label1.Name = "label1";
             label1.Size = new Size(41, 15);
             label1.TabIndex = 3;
@@ -126,7 +126,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(260, 117);
+            label2.Location = new Point(349, 193);
             label2.Name = "label2";
             label2.Size = new Size(49, 15);
             label2.TabIndex = 4;
@@ -135,9 +135,10 @@
             // label
             // 
             label.AutoSize = true;
-            label.Location = new Point(260, 46);
+            label.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label.Location = new Point(250, 51);
             label.Name = "label";
-            label.Size = new Size(182, 15);
+            label.Size = new Size(341, 30);
             label.TabIndex = 5;
             label.Text = "Пожалуйста, войдите в систему";
             label.Click += label3_Click;
@@ -145,7 +146,7 @@
             // txtLogin
             // 
             txtLogin.BackColor = SystemColors.Menu;
-            txtLogin.Location = new Point(280, 91);
+            txtLogin.Location = new Point(367, 154);
             txtLogin.Name = "txtLogin";
             txtLogin.Size = new Size(100, 23);
             txtLogin.TabIndex = 16;
@@ -154,7 +155,7 @@
             // 
             button1.BackColor = SystemColors.Menu;
             button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            button1.Location = new Point(260, 186);
+            button1.Location = new Point(323, 271);
             button1.Name = "button1";
             button1.Size = new Size(182, 35);
             button1.TabIndex = 17;
@@ -166,7 +167,7 @@
             // 
             button2.BackColor = SystemColors.Menu;
             button2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            button2.Location = new Point(260, 248);
+            button2.Location = new Point(323, 323);
             button2.Name = "button2";
             button2.Size = new Size(182, 35);
             button2.TabIndex = 18;
@@ -177,7 +178,7 @@
             // txtPassword
             // 
             txtPassword.BackColor = SystemColors.Menu;
-            txtPassword.Location = new Point(280, 135);
+            txtPassword.Location = new Point(367, 221);
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(100, 23);
             txtPassword.TabIndex = 19;

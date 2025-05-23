@@ -34,12 +34,15 @@ namespace SeparationSecret
                 руководствоПользователяToolStripMenuItem.Text = userManual[Nlanguage];
                 языкToolStripMenuItem.Text = language[Nlanguage];
 
-                
+                button1.Text = Authorization[Nlanguage];
                 button2.Text = Signup[Nlanguage];
 
-                label2.Text = Password[Nlanguage];
-                label.Text = Pleaselogin[Nlanguage];
-                label1.Text = Login[Nlanguage];
+                label2.Text = Name[Nlanguage];
+                label.Text = Registration[Nlanguage];
+                label1.Text = Surname[Nlanguage];
+                label3.Text = Patronymic[Nlanguage];
+                label5.Text = CreateUsername[Nlanguage];
+                label4.Text = ComeUpPassword[Nlanguage];
 
             }
         }
@@ -98,12 +101,16 @@ namespace SeparationSecret
         public static List<string> developers = new List<string>() { "Разработчики:", "Developers:" };
         public static List<string> supportService = new List<string>() { "Служба поддержки", "Support service" };
 
-        static List<string> Signin = new List<string>() { "Войти", "Sign in" };
-        static List<string> Signup = new List<string>() { "Зарегистрироваться", "Sign up" };
+        static List<string> Signup = new List<string>() { "Регистрация", "Registration" };
+        static List<string> Authorization = new List<string>() { "Авторизация", "Authorization" };
 
-        static List<string> Password = new List<string>() { "Пароль", "Password" };
-        static List<string> Login = new List<string>() { "Логин", "Login" };
-        static List<string> Pleaselogin = new List<string>() { "Пожалуйста, войдите в систему", "Please login" };
+        static List<string> Name = new List<string>() { "Имя*", "Name*" };
+        static List<string> Surname = new List<string>() { "Фамилия*", "Surname*" };
+        static List<string> Patronymic = new List<string>() { "Отчество (при наличии)", "Patronymic (if any)" };
+        static List<string> Registration = new List<string>() { "Регистрация", "Registration" };
+        static List<string> CreateUsername = new List<string>() { "Придумайте логин*", "Create a username*" };
+        static List<string> ComeUpPassword = new List<string>() { "Придумайте пароль*", "Come up with a password*" };
+
 
         static List<string> enterMinimumRequiredNumberPartsSecretRecover = new List<string>() { "Введите минимально необходимое кол-во частей секрета для восстановления :", "Enter the minimum required number of parts of secret to recover :" };
         static List<string> result = new List<string>() { "Результат :", "Result :" };
@@ -197,6 +204,18 @@ namespace SeparationSecret
             MainForm MainForm = new MainForm();
             MainForm.Show();
             this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AutForm AutForm = new AutForm();
+            AutForm.Show();
+            this.Close();
+        }
+
+        private void label_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

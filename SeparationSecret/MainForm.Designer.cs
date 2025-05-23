@@ -33,12 +33,14 @@ namespace SeparationSecret
             файлToolStripMenuItem = new ToolStripMenuItem();
             выходИзАккаунтаToolStripMenuItem = new ToolStripMenuItem();
             файлToolStripMenuItem1 = new ToolStripMenuItem();
+            настройкиToolStripMenuItem = new ToolStripMenuItem();
             справкаToolStripMenuItem = new ToolStripMenuItem();
             оПрограммеToolStripMenuItem = new ToolStripMenuItem();
             руководствоПользователяToolStripMenuItem = new ToolStripMenuItem();
             языкToolStripMenuItem = new ToolStripMenuItem();
             русскийToolStripMenuItem = new ToolStripMenuItem();
             английскийToolStripMenuItem = new ToolStripMenuItem();
+            аккаунтToolStripMenuItem = new ToolStripMenuItem();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
@@ -56,12 +58,13 @@ namespace SeparationSecret
             textBox6 = new TextBox();
             textBox7 = new TextBox();
             helpProvider = new HelpProvider();
+            историяToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { файлToolStripMenuItem, справкаToolStripMenuItem, языкToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { файлToolStripMenuItem, справкаToolStripMenuItem, языкToolStripMenuItem, аккаунтToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(828, 24);
@@ -70,10 +73,10 @@ namespace SeparationSecret
             // 
             // файлToolStripMenuItem
             // 
-            файлToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { выходИзАккаунтаToolStripMenuItem, файлToolStripMenuItem1 });
+            файлToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { выходИзАккаунтаToolStripMenuItem, файлToolStripMenuItem1, историяToolStripMenuItem, настройкиToolStripMenuItem });
             файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            файлToolStripMenuItem.Size = new Size(48, 20);
-            файлToolStripMenuItem.Text = "Файл";
+            файлToolStripMenuItem.Size = new Size(63, 20);
+            файлToolStripMenuItem.Text = "Аккаунт";
             // 
             // выходИзАккаунтаToolStripMenuItem
             // 
@@ -88,6 +91,12 @@ namespace SeparationSecret
             файлToolStripMenuItem1.Size = new Size(196, 22);
             файлToolStripMenuItem1.Text = "Выход из приложения";
             файлToolStripMenuItem1.Click += файлToolStripMenuItem1_Click;
+            // 
+            // настройкиToolStripMenuItem
+            // 
+            настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
+            настройкиToolStripMenuItem.Size = new Size(196, 22);
+            настройкиToolStripMenuItem.Text = "Настройки";
             // 
             // справкаToolStripMenuItem
             // 
@@ -130,6 +139,11 @@ namespace SeparationSecret
             английскийToolStripMenuItem.Size = new Size(119, 22);
             английскийToolStripMenuItem.Text = "English";
             английскийToolStripMenuItem.Click += английскийToolStripMenuItem_Click_1;
+            // 
+            // аккаунтToolStripMenuItem
+            // 
+            аккаунтToolStripMenuItem.Name = "аккаунтToolStripMenuItem";
+            аккаунтToolStripMenuItem.Size = new Size(12, 20);
             // 
             // label2
             // 
@@ -311,6 +325,13 @@ namespace SeparationSecret
             // 
             helpProvider.HelpNamespace = "SeparationSecretHelp.chm";
             // 
+            // историяToolStripMenuItem
+            // 
+            историяToolStripMenuItem.Name = "историяToolStripMenuItem";
+            историяToolStripMenuItem.Size = new Size(196, 22);
+            историяToolStripMenuItem.Text = "История";
+            историяToolStripMenuItem.Click += историяToolStripMenuItem_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -384,5 +405,8 @@ namespace SeparationSecret
         private TextBox textBox7;
         private HelpProvider helpProvider;
         private ToolStripMenuItem выходИзАккаунтаToolStripMenuItem;
+        private ToolStripMenuItem аккаунтToolStripMenuItem;
+        private ToolStripMenuItem настройкиToolStripMenuItem;
+        private ToolStripMenuItem историяToolStripMenuItem;
     }
 }
