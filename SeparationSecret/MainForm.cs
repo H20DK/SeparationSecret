@@ -207,5 +207,11 @@ namespace SeparationSecret
             History History = new History(version[Nlanguage], developers[Nlanguage]);
             History.ShowDialog();
         }
+
+        private void íàñòðîéêèToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings Settings = new Settings(version[Nlanguage], developers[Nlanguage]);
+            Settings.ShowDialog();
+        }
     }
 }
