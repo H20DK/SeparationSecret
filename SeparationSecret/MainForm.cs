@@ -1,17 +1,20 @@
-using Microsoft.VisualBasic.ApplicationServices;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using SecretSharing;
+using System.Data;
 using System.Diagnostics.Metrics;
 using System.IO;
-using System.Windows.Forms;
 using System.Net.Sockets;
+using System.Numerics;
 using System.Text;
-using SecretSharing;
+using System.Windows.Forms;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SeparationSecret
 {
     public partial class MainForm : Form
     {
         public static int NumberLanguage = 0;
+        private DataTable sharesTable; // Таблица для хранения частей секрета
         int Nlanguage
         {
             get
@@ -23,15 +26,15 @@ namespace SeparationSecret
             {
                 NumberLanguage = value;
 
-                ����ToolStripMenuItem.Text = file[Nlanguage];
-                ����ToolStripMenuItem1.Text = output[Nlanguage];
-                ���������������ToolStripMenuItem.Text = output2[Nlanguage];
-                ���������ToolStripMenuItem.Text = settings[Nlanguage];
-                �������ToolStripMenuItem.Text = help[Nlanguage];
-                ����������ToolStripMenuItem.Text = aboutTheProgram[Nlanguage];
-                �����������������������ToolStripMenuItem.Text = userManual[Nlanguage];
-                ����ToolStripMenuItem.Text = language[Nlanguage];
-                button1.Text = shareSecret[Nlanguage];
+                файлToolStripMenuItem.Text = file[Nlanguage];
+                файлToolStripMenuItem1.Text = output[Nlanguage];
+                выходИзАккаунтаToolStripMenuItem.Text = output2[Nlanguage];
+                настройкиToolStripMenuItem.Text = settings[Nlanguage];
+                справкаToolStripMenuItem.Text = help[Nlanguage];
+                оПрограммеToolStripMenuItem.Text = aboutTheProgram[Nlanguage];
+                руководствоПользователяToolStripMenuItem.Text = userManual[Nlanguage];
+                языкToolStripMenuItem.Text = language[Nlanguage];
+                btnSplit.Text = shareSecret[Nlanguage];
                 label2.Text = enterSecret[Nlanguage];
                 label3.Text = enterNumberPartsSecret[Nlanguage];
                 label4.Text = enterMinimumRequiredNumberPartsSecretRecover[Nlanguage];
@@ -45,17 +48,18 @@ namespace SeparationSecret
         public MainForm()
         {
             InitializeComponent();
-            EnsureHelpFileExists(); // ��������� ���� �������
-            Program.RegisterForm(this); // ������������ �����
+            InitializeDataGridView(); // Инициализация таблицы
+            EnsureHelpFileExists(); // Извлекаем файл справки
+            Program.RegisterForm(this); // Регистрируем форму
 
-            // ��������� HelpProvider
+            // Настройка HelpProvider
             helpProvider = new HelpProvider();
-            // ���������� ������������� ���� � CHM-�����
+            // Используем относительный путь к CHM-файлу
             string helpFilePath = Path.Combine(Application.StartupPath, "Properties", "SeparationSecretHelp.chm");
             helpProvider.HelpNamespace = helpFilePath;
             helpProvider.SetHelpNavigator(this, HelpNavigator.TableOfContents);
 
-            // ��������� ��������� ������ �� ������ �����
+            // Включение обработки клавиш на уровне формы
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(Form1_KeyDown);
         }
@@ -65,13 +69,13 @@ namespace SeparationSecret
             string helpFilePath = Path.Combine(Application.StartupPath, "Properties", "SeparationSecretHelp.chm");
             if (!File.Exists(helpFilePath))
             {
-                File.WriteAllBytes(helpFilePath, Properties.Resources.HelpFile); // ��������� �� ��������
+                File.WriteAllBytes(helpFilePath, Properties.Resources.HelpFile); // Извлекаем из ресурсов
             }
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            // �������� ������� ������� F1
+            // Проверка нажатия клавиши F1
             if (e.KeyCode == Keys.F1)
             {
                 string helpFilePath = Path.Combine(Application.StartupPath, "Properties", "SeparationSecretHelp.chm");
@@ -81,45 +85,45 @@ namespace SeparationSecret
                 }
                 else
                 {
-                    MessageBox.Show($"���� ������� �� ������ �� ����: {helpFilePath}", "������", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Файл справки не найден по пути: {helpFilePath}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                e.Handled = true; // �������� ������� ��� ������������
+                e.Handled = true; // Отмечаем событие как обработанное
             }
         }
 
-        static List<string> file = new List<string>() { "�������", "Account" };
-        static List<string> output = new List<string>() { "����� �� ����������", "Exiting the app" };
-        static List<string> output2 = new List<string>() { "����� �� ��������", "Exit from account" };
-        static List<string> settings = new List<string>() { "���������", "Settings" };
-        static List<string> help = new List<string>() { "�������", "Help" };
-        static List<string> aboutTheProgram = new List<string>() { "� ���������", "About the program" };
-        static List<string> userManual = new List<string>() { "����������� ������������", "User manual" };
-        static List<string> language = new List<string>() { "����", "Language" };
-        static List<string> shareSecret = new List<string>() { "��������� ������", "Share a secret:" };
-        static List<string> enterSecret = new List<string>() { "������� ������ :", "Enter the secret :" };
-        static List<string> enterNumberPartsSecret = new List<string>() { "������� ���������� ������ ������� :", "Enter the number of parts of the secret :" };
-        static List<string> enterMinimumRequiredNumberPartsSecretRecover = new List<string>() { "������� ���������� ����������� ���-�� ������ ������� ��� �������������� :", "Enter the minimum required number of parts of secret to recover :" };
-        static List<string> result = new List<string>() { "��������� :", "Result :" };
-        static List<string> recoverSecret = new List<string>() { "������������ ������", "Recover secret" };
-        static List<string> enterNthSecret = new List<string>() { "������� n-�� ������:", "Enter the nth secret :" };
+        static List<string> file = new List<string>() { "Аккаунт", "Account" };
+        static List<string> output = new List<string>() { "Выход из приложения", "Exiting the app" };
+        static List<string> output2 = new List<string>() { "Выход из аккаунта", "Exit from account" };
+        static List<string> settings = new List<string>() { "Настройки", "Settings" };
+        static List<string> help = new List<string>() { "Справка", "Help" };
+        static List<string> aboutTheProgram = new List<string>() { "О программе", "About the program" };
+        static List<string> userManual = new List<string>() { "Руководство пользователя", "User manual" };
+        static List<string> language = new List<string>() { "Язык", "Language" };
+        static List<string> shareSecret = new List<string>() { "Разделить секрет", "Share a secret:" };
+        static List<string> enterSecret = new List<string>() { "Введите секрет :", "Enter the secret :" };
+        static List<string> enterNumberPartsSecret = new List<string>() { "Введите количество частей секрета :", "Enter the number of parts of the secret :" };
+        static List<string> enterMinimumRequiredNumberPartsSecretRecover = new List<string>() { "Введите минимально необходимое кол-во частей секрета для восстановления :", "Enter the minimum required number of parts of secret to recover :" };
+        static List<string> result = new List<string>() { "Результат :", "Result :" };
+        static List<string> recoverSecret = new List<string>() { "Восстановить секрет", "Recover secret" };
+        static List<string> enterNthSecret = new List<string>() { "Введите n-ый секрет:", "Enter the nth secret :" };
 
-        public static List<string> errorNonNumber = new List<string>() { "�� �����", "Not a number" };
-        public static List<string> errorFormat = new List<string>() { "������������ ������ �����", "Incorrect input format" };
-        public static List<string> errors = new List<string>() { "���� ������, �������� �� ��� ���������", "There were mistakes, the wrong result is possible" };
-        public static List<string> errorCalculate = new List<string>() { "����� ��������� ��������� �� �����", "The program cannot calculate this" };
-        public static List<string> errorLoadLanguage = new List<string>() { "������ � ���������� ����� � �������� �����", "Error in the number of lines in the language file" };
+        public static List<string> errorNonNumber = new List<string>() { "не число", "Not a number" };
+        public static List<string> errorFormat = new List<string>() { "Неправильный формат ввода", "Incorrect input format" };
+        public static List<string> errors = new List<string>() { "Были ошибки, возможен не тот результат", "There were mistakes, the wrong result is possible" };
+        public static List<string> errorCalculate = new List<string>() { "Такое программа посчитать не может", "The program cannot calculate this" };
+        public static List<string> errorLoadLanguage = new List<string>() { "Ошибка в количестве строк в языковом файле", "Error in the number of lines in the language file" };
 
-        public static List<string> version = new List<string>() { "������:", "Version:" };
-        public static List<string> developers = new List<string>() { "������������:", "Developers:" };
+        public static List<string> version = new List<string>() { "Версия:", "Version:" };
+        public static List<string> developers = new List<string>() { "Разработчики:", "Developers:" };
 
-        public static List<string> supportService = new List<string>() { "������ ���������", "Support service" };
+        public static List<string> supportService = new List<string>() { "Служба поддержки", "Support service" };
 
-        private void ����ToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void файлToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void ����ToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void языкToolStripMenuItem1_Click(object sender, EventArgs e)
         {
 
         }
@@ -129,17 +133,17 @@ namespace SeparationSecret
 
         }
 
-        private void ����������ToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void английскийToolStripMenuItem1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void ����������ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void английскийToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void ����������ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
         {
             about_the_program about_the_program = new about_the_program(version[Nlanguage], developers[Nlanguage]);
             about_the_program.ShowDialog();
@@ -180,17 +184,17 @@ namespace SeparationSecret
 
         }
 
-        private void �������ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void русскийToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Nlanguage = 0;
         }
 
-        private void ����������ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        private void английскийToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             Nlanguage = 1;
         }
 
-        private void ���������������ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void выходИзАккаунтаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AutForm AutForm = new AutForm();
             AutForm.Show();
@@ -202,16 +206,196 @@ namespace SeparationSecret
 
         }
 
-        private void �������ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void историяToolStripMenuItem_Click(object sender, EventArgs e)
         {
             History History = new History(version[Nlanguage], developers[Nlanguage]);
-            History.ShowDialog();
+            History.Show();
+            this.Close();
         }
 
-        private void ���������ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Settings Settings = new Settings(version[Nlanguage], developers[Nlanguage]);
-            Settings.ShowDialog();
+            Settings.Show();
+            this.Close();
+        }
+
+        private void InitializeDataGridView()
+        {
+            // Проверяем, инициализирован ли dgvShares
+            if (dgvShares == null)
+            {
+                MessageBox.Show("DataGridView (dgvShares) не найден на форме. Проверьте дизайн формы.", "Ошибка инициализации", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Создаём DataTable для хранения частей секрета
+            sharesTable = new DataTable();
+            sharesTable.Columns.Add("Дата", typeof(string));
+            sharesTable.Columns.Add("Описание", typeof(string));
+            sharesTable.Columns.Add("Число", typeof(string));
+            sharesTable.Columns.Add("Владелец", typeof(string));
+
+            // Настраиваем DataGridView
+            dgvShares.DataSource = sharesTable;
+            dgvShares.Columns["Дата"].ReadOnly = true;
+            dgvShares.Columns["Описание"].ReadOnly = true;
+            dgvShares.Columns["Число"].ReadOnly = true;
+            dgvShares.Columns["Владелец"].ReadOnly = false;
+        }// Только Владелец редактируемый
+
+        private void btnSplit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Валидация ввода
+                if (string.IsNullOrWhiteSpace(txtSecret.Text) || !BigInteger.TryParse(txtSecret.Text, out BigInteger secret) || secret <= 0)
+                {
+                    MessageBox.Show("Введите корректный числовой секрет (целое число > 0).", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txtPartsCount.Text) || !int.TryParse(txtPartsCount.Text, out int partsCount) || partsCount <= 0)
+                {
+                    MessageBox.Show("Введите корректное количество частей (целое число > 0).", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txtMinParts.Text) || !int.TryParse(txtMinParts.Text, out int minParts) || minParts <= 0 || minParts > partsCount)
+                {
+                    MessageBox.Show("Введите корректное минимальное количество частей (целое число > 0 и ≤ количества частей).", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Очищаем таблицу
+                sharesTable.Clear();
+
+                // Разделение секрета
+                (BigInteger[] remainders, BigInteger[] moduli) = SplitSecret(secret, partsCount, minParts);
+
+                // Заполняем таблицу
+                string currentDate = DateTime.Now.ToString("dd.MM.yyyy"); // 27.05.2025
+                for (int i = 0; i < partsCount; i++)
+                {
+                    string description = $"Часть секрета {i + 1}";
+                    string number = $"{remainders[i]} (mod {moduli[i]})";
+                    sharesTable.Rows.Add(currentDate, description, number, "");
+                }
+
+                MessageBox.Show("Секрет успешно разделён!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при разделении секрета: {ex.Message}\n{ex.StackTrace}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private (BigInteger[], BigInteger[]) SplitSecret(BigInteger secret, int partsCount, int minParts)
+        {
+            try
+            {
+                // Генерируем попарно взаимно простые числа
+                BigInteger[] moduli = GenerateCoprimeNumbers(partsCount, secret);
+
+                // Проверяем, что произведение модулей больше секрета
+                BigInteger product = 1;
+                foreach (var m in moduli)
+                {
+                    product *= m;
+                }
+                if (product <= secret)
+                {
+                    throw new Exception("Произведение модулей должно быть больше секрета. Попробуйте увеличить количество частей или использовать меньший секрет.");
+                }
+
+                // Вычисляем остатки
+                BigInteger[] remainders = new BigInteger[partsCount];
+                for (int i = 0; i < partsCount; i++)
+                {
+                    remainders[i] = secret % moduli[i];
+                }
+
+                return (remainders, moduli);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Ошибка в SplitSecret: {ex.Message}", ex);
+            }
+        }
+
+        private BigInteger[] GenerateCoprimeNumbers(int count, BigInteger secret)
+        {
+            try
+            {
+                BigInteger[] moduli = new BigInteger[count];
+                Random rand = new Random();
+                BigInteger start = BigInteger.Max(secret + 1, 1000);
+
+                for (int i = 0; i < count; i++)
+                {
+                    BigInteger candidate = start + i * 10 + rand.Next(1, 10);
+                    while (!IsCoprimeWithAll(candidate, moduli, i))
+                    {
+                        candidate++;
+                    }
+                    moduli[i] = candidate;
+                }
+
+                return moduli;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Ошибка в GenerateCoprimeNumbers: {ex.Message}", ex);
+            }
+        }
+
+        private bool IsCoprimeWithAll(BigInteger number, BigInteger[] moduli, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                if (BigInteger.GreatestCommonDivisor(number, moduli[i]) != 1)
+                    return false;
+            }
+            return true;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (DataRow row in sharesTable.Rows)
+                {
+                    if (string.IsNullOrWhiteSpace(row["Владелец"].ToString()))
+                    {
+                        MessageBox.Show("Укажите владельца для каждой части секрета.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+
+                string filePath = Path.Combine(Application.StartupPath, "shares.txt");
+                bool fileExists = File.Exists(filePath);
+
+                using (StreamWriter writer = new StreamWriter(filePath, true)) // append = true для дописывания
+                {
+                    // Если файл создаётся впервые, записываем начальные данные
+                    if (!fileExists)
+                    {
+                        writer.WriteLine("Дата | Описание | Число | Владелец");
+                    }
+
+                    // Дописываем новые данные из таблицы
+                    foreach (DataRow row in sharesTable.Rows)
+                    {
+                        writer.WriteLine($"{row["Дата"]} | {row["Описание"]} | {row["Число"]} | {row["Владелец"]}");
+                    }
+                }
+
+                MessageBox.Show("Таблица успешно сохранена в shares.txt!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сохранении таблицы: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

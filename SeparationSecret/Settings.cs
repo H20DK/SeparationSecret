@@ -26,17 +26,23 @@ namespace SeparationSecret
             {
                 NumberLanguage = value;
 
-                файлToolStripMenuItem.Text = file[Nlanguage];
-                
+                фToolStripMenuItem.Text = file[Nlanguage];
+                вToolStripMenuItem.Text = output2[Nlanguage];
+                выToolStripMenuItem.Text = output[Nlanguage];
+
                 справкаToolStripMenuItem.Text = help[Nlanguage];
                 оПрограммеToolStripMenuItem.Text = aboutTheProgram[Nlanguage];
                 руководствоПользователяToolStripMenuItem.Text = userManual[Nlanguage];
                 языкToolStripMenuItem.Text = language[Nlanguage];
-                button1.Text = shareSecret[Nlanguage];
-                label2.Text = enterSecret[Nlanguage];
-                label3.Text = enterNumberPartsSecret[Nlanguage];
-                label4.Text = enterMinimumRequiredNumberPartsSecretRecover[Nlanguage];
-                
+
+                button1.Text = changePassword[Nlanguage];
+
+                label1.Text = passwordChangeForm[Nlanguage];
+                label2.Text = enterUsername[Nlanguage];
+                label3.Text = enterCurrentPassword[Nlanguage];
+                label4.Text = enterNewPassword[Nlanguage];
+
+
             }
         }
         public Settings(string v, string d)
@@ -44,8 +50,8 @@ namespace SeparationSecret
             InitializeComponent();
             Program.RegisterForm(this); // Регистрируем форму
 
-            label4.Text = v;
-            label3.Text = d;
+            label3.Text = v;
+            label4.Text = d;
 
             // Настройка HelpProvider
             helpProvider = new HelpProvider();
@@ -86,21 +92,20 @@ namespace SeparationSecret
             }
         }
 
-        static List<string> file = new List<string>() { "Аккаунт", "Account" };
-        static List<string> output = new List<string>() { "Выход из приложения", "Exiting the app" };
+        static List<string> file = new List<string>() { "Файл", "File" };
+        static List<string> output = new List<string>() { "Назад", "Back" };
         static List<string> output2 = new List<string>() { "Выход из аккаунта", "Exit from account" };
-        static List<string> settings = new List<string>() { "Настройки", "Settings" };
         static List<string> help = new List<string>() { "Справка", "Help" };
         static List<string> aboutTheProgram = new List<string>() { "О программе", "About the program" };
         static List<string> userManual = new List<string>() { "Руководство пользователя", "User manual" };
         static List<string> language = new List<string>() { "Язык", "Language" };
-        static List<string> shareSecret = new List<string>() { "Разделить секрет", "Share a secret:" };
-        static List<string> enterSecret = new List<string>() { "Введите секрет :", "Enter the secret :" };
-        static List<string> enterNumberPartsSecret = new List<string>() { "Введите количество частей секрета :", "Enter the number of parts of the secret :" };
-        static List<string> enterMinimumRequiredNumberPartsSecretRecover = new List<string>() { "Введите минимально необходимое кол-во частей секрета для восстановления :", "Enter the minimum required number of parts of secret to recover :" };
-        static List<string> result = new List<string>() { "Результат :", "Result :" };
-        static List<string> recoverSecret = new List<string>() { "Восстановить секрет", "Recover secret" };
-        static List<string> enterNthSecret = new List<string>() { "Введите n-ый секрет:", "Enter the nth secret :" };
+
+        static List<string> changePassword = new List<string>() { "Сменить пароль", "Change password" };
+
+        static List<string> passwordChangeForm = new List<string>() { "Форма смены пароля", "Password change form" };
+        static List<string> enterUsername = new List<string>() { "Введите логин", "Enter your username" };
+        static List<string> enterNewPassword = new List<string>() { "Введите новый пароль", "Enter a new password" };
+        static List<string> enterCurrentPassword = new List<string>() { "Введите текущий пароль", "Enter your current password" };
 
         public static List<string> errorNonNumber = new List<string>() { "не число", "Not a number" };
         public static List<string> errorFormat = new List<string>() { "Неправильный формат ввода", "Incorrect input format" };
@@ -132,7 +137,9 @@ namespace SeparationSecret
 
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Close();
+            MainForm MainForm = new MainForm();
+            MainForm.Show();
+            this.Close();
         }
 
         private void русскийToolStripMenuItem_Click(object sender, EventArgs e)
@@ -143,6 +150,13 @@ namespace SeparationSecret
         private void englishToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Nlanguage = 1;
+        }
+
+        private void вToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AutForm AutForm = new AutForm();
+            AutForm.Show();
+            this.Close();
         }
     }
 }

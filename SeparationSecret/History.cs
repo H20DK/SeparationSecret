@@ -32,9 +32,9 @@ namespace SeparationSecret
                 руководствоПользователяToolStripMenuItem.Text = userManual[Nlanguage];
                 языкToolStripMenuItem.Text = language[Nlanguage];
                 
-                label2.Text = enterSecret[Nlanguage];
+                label200.Text = enterSecret[Nlanguage];
                 label3.Text = enterNumberPartsSecret[Nlanguage];
-                label4.Text = enterMinimumRequiredNumberPartsSecretRecover[Nlanguage];
+                label1.Text = enterMinimumRequiredNumberPartsSecretRecover[Nlanguage];
                 
             }
         }
@@ -43,7 +43,7 @@ namespace SeparationSecret
             InitializeComponent();
             Program.RegisterForm(this); // Регистрируем форму
 
-            label4.Text = v;
+            label1.Text = v;
             label3.Text = d;
 
             // Настройка HelpProvider
