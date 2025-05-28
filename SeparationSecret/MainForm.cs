@@ -15,6 +15,7 @@ namespace SeparationSecret
     {
         public static int NumberLanguage = 0;
         private DataTable sharesTable; // Таблица для хранения частей секрета
+        private DataTable restoreTable;
         int Nlanguage
         {
             get
@@ -39,7 +40,7 @@ namespace SeparationSecret
                 label3.Text = enterNumberPartsSecret[Nlanguage];
                 label4.Text = enterMinimumRequiredNumberPartsSecretRecover[Nlanguage];
                 label5.Text = result[Nlanguage];
-                button2.Text = recoverSecret[Nlanguage];
+                btnRestore_Click.Text = recoverSecret[Nlanguage];
                 label10.Text = enterNumberPartsSecret[Nlanguage];
                 label7.Text = enterNthSecret[Nlanguage];
                 label11.Text = result[Nlanguage];
@@ -49,6 +50,8 @@ namespace SeparationSecret
         {
             InitializeComponent();
             InitializeDataGridView(); // Инициализация таблицы
+            InitializeRestoreDataGridView();
+
             EnsureHelpFileExists(); // Извлекаем файл справки
             Program.RegisterForm(this); // Регистрируем форму
 
@@ -203,7 +206,30 @@ namespace SeparationSecret
 
         private void button2_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (restoreTable == null)
+                {
+                    InitializeRestoreDataGridView();
+                }
 
+                if (string.IsNullOrWhiteSpace(txtRestorePartsCount.Text) || !int.TryParse(txtRestorePartsCount.Text, out int partsCount) || partsCount <= 0)
+                {
+                    MessageBox.Show("Введите корректное количество частей (целое число > 0).", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                restoreTable.Clear();
+                string currentDate = DateTime.Now.ToString("dd.MM.yyyy"); // 28.05.2025
+                for (int i = 0; i < partsCount; i++)
+                {
+                    restoreTable.Rows.Add(currentDate, $"Часть секрета {i + 1}", "", "");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при подготовке восстановления: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void историяToolStripMenuItem_Click(object sender, EventArgs e)
@@ -243,6 +269,27 @@ namespace SeparationSecret
             dgvShares.Columns["Число"].ReadOnly = true;
             dgvShares.Columns["Владелец"].ReadOnly = false;
         }// Только Владелец редактируемый
+
+        private void InitializeRestoreDataGridView()
+        {
+            if (dgvRestore == null)
+            {
+                MessageBox.Show("DataGridView (dgvRestore) не найден на форме. Проверьте дизайн формы.", "Ошибка инициализации", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            restoreTable = new DataTable();
+            restoreTable.Columns.Add("Дата", typeof(string));
+            restoreTable.Columns.Add("Описание", typeof(string));
+            restoreTable.Columns.Add("Число", typeof(string));
+            restoreTable.Columns.Add("Владелец", typeof(string));
+
+            dgvRestore.DataSource = restoreTable;
+            dgvRestore.Columns["Дата"].ReadOnly = true;
+            dgvRestore.Columns["Описание"].ReadOnly = true;
+            dgvRestore.Columns["Число"].ReadOnly = false;
+            dgvRestore.Columns["Владелец"].ReadOnly = false;
+        }
 
         private void btnSplit_Click(object sender, EventArgs e)
         {
@@ -294,19 +341,8 @@ namespace SeparationSecret
         {
             try
             {
-                // Генерируем попарно взаимно простые числа
+                // Генерируем попарно взаимно простые модули
                 BigInteger[] moduli = GenerateCoprimeNumbers(partsCount, secret);
-
-                // Проверяем, что произведение модулей больше секрета
-                BigInteger product = 1;
-                foreach (var m in moduli)
-                {
-                    product *= m;
-                }
-                if (product <= secret)
-                {
-                    throw new Exception("Произведение модулей должно быть больше секрета. Попробуйте увеличить количество частей или использовать меньший секрет.");
-                }
 
                 // Вычисляем остатки
                 BigInteger[] remainders = new BigInteger[partsCount];
@@ -328,17 +364,27 @@ namespace SeparationSecret
             try
             {
                 BigInteger[] moduli = new BigInteger[count];
-                Random rand = new Random();
-                BigInteger start = BigInteger.Max(secret + 1, 1000);
+                int[] primes = { 17, 19, 23, 29, 31, 37, 41, 43, 47, 53 }; // Список простых чисел
+                if (count > primes.Length)
+                {
+                    throw new Exception("Слишком много частей. Увеличьте список простых чисел.");
+                }
 
+                // Выбираем модули меньше секрета
                 for (int i = 0; i < count; i++)
                 {
-                    BigInteger candidate = start + i * 10 + rand.Next(1, 10);
-                    while (!IsCoprimeWithAll(candidate, moduli, i))
-                    {
-                        candidate++;
-                    }
-                    moduli[i] = candidate;
+                    moduli[i] = primes[i];
+                }
+
+                // Проверяем, что произведение модулей больше секрета
+                BigInteger product = 1;
+                foreach (var m in moduli)
+                {
+                    product *= m;
+                }
+                if (product <= secret)
+                {
+                    throw new Exception("Произведение модулей должно быть больше секрета. Увеличьте количество частей или используйте меньший секрет.");
                 }
 
                 return moduli;
@@ -347,16 +393,6 @@ namespace SeparationSecret
             {
                 throw new Exception($"Ошибка в GenerateCoprimeNumbers: {ex.Message}", ex);
             }
-        }
-
-        private bool IsCoprimeWithAll(BigInteger number, BigInteger[] moduli, int count)
-        {
-            for (int i = 0; i < count; i++)
-            {
-                if (BigInteger.GreatestCommonDivisor(number, moduli[i]) != 1)
-                    return false;
-            }
-            return true;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -396,6 +432,117 @@ namespace SeparationSecret
             {
                 MessageBox.Show($"Ошибка при сохранении таблицы: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnCalculate_Click_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int partsCount = restoreTable.Rows.Count;
+                if (partsCount == 0)
+                {
+                    MessageBox.Show("Таблица для восстановления пуста. Добавьте части секрета.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                BigInteger[] remainders = new BigInteger[partsCount];
+                BigInteger[] moduli = new BigInteger[partsCount];
+
+                for (int i = 0; i < partsCount; i++)
+                {
+                    string number = restoreTable.Rows[i]["Число"].ToString();
+                    if (string.IsNullOrWhiteSpace(number))
+                    {
+                        MessageBox.Show($"Поле 'Число' в строке {i + 1} пустое.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    string[] numbers = number.Split(' ');
+                    if (numbers.Length != 2 || !BigInteger.TryParse(numbers[0], out remainders[i]) || !BigInteger.TryParse(numbers[1], out moduli[i]) || moduli[i] <= 0)
+                    {
+                        MessageBox.Show($"Некорректный формат в строке {i + 1}: введите два числа через пробел (остаток модуль).", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    if (remainders[i] < 0 || remainders[i] >= moduli[i])
+                    {
+                        MessageBox.Show($"Остаток в строке {i + 1} должен быть в диапазоне [0, {moduli[i] - 1}].", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+
+                // Проверка попарной взаимной простоты модулей
+                for (int i = 0; i < partsCount; i++)
+                {
+                    for (int j = i + 1; j < partsCount; j++)
+                    {
+                        if (BigInteger.GreatestCommonDivisor(moduli[i], moduli[j]) != 1)
+                        {
+                            MessageBox.Show($"Модули {moduli[i]} и {moduli[j]} не взаимно просты.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                    }
+                }
+
+                BigInteger result = RestoreSecret(remainders, moduli);
+                MessageBox.Show($"Восстановленный секрет: {result}", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при вычислении секрета: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private BigInteger RestoreSecret(BigInteger[] remainders, BigInteger[] moduli)
+        {
+            try
+            {
+                int n = remainders.Length;
+                BigInteger product = 1;
+                for (int i = 0; i < n; i++)
+                {
+                    product *= moduli[i];
+                }
+
+                BigInteger result = 0;
+                for (int i = 0; i < n; i++)
+                {
+                    BigInteger p = product / moduli[i];
+                    BigInteger inverse = ModInverse(p, moduli[i]);
+                    result += remainders[i] * p * inverse;
+                }
+
+                return result % product;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Ошибка в RestoreSecret: {ex.Message}", ex);
+            }
+        }
+
+        private BigInteger ModInverse(BigInteger a, BigInteger m)
+        {
+            BigInteger m0 = m, t, q;
+            BigInteger x0 = 0, x1 = 1;
+
+            if (m == 1)
+                return 0;
+
+            while (a > 1)
+            {
+                q = a / m;
+                t = m;
+                m = a % m;
+                a = t;
+                t = x0;
+                x0 = x1 - q * x0;
+                x1 = t;
+            }
+
+            if (x1 < 0)
+                x1 += m0;
+
+            return x1;
         }
     }
 }

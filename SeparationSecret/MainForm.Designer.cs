@@ -45,30 +45,21 @@ namespace SeparationSecret
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
-            label5 = new Label();
-            label7 = new Label();
             label10 = new Label();
-            label11 = new Label();
             btnSplit = new Button();
-            button2 = new Button();
+            btnRestore_Click = new Button();
             txtSecret = new TextBox();
             txtPartsCount = new TextBox();
             txtMinParts = new TextBox();
-            textBox4 = new TextBox();
-            textBox5 = new TextBox();
-            textBox6 = new TextBox();
-            textBox7 = new TextBox();
+            txtRestorePartsCount = new TextBox();
             helpProvider = new HelpProvider();
             btnSave = new Button();
-            label1 = new Label();
-            label6 = new Label();
-            label8 = new Label();
-            label9 = new Label();
-            label100 = new Label();
-            label200 = new Label();
+            btnCalculate_Click = new Button();
             dgvShares = new DataGridView();
+            dgvRestore = new DataGridView();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvShares).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvRestore).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -191,44 +182,14 @@ namespace SeparationSecret
             label4.TabIndex = 4;
             label4.Text = "Введите минимально необходимое кол-во частей секрета для восстановления :";
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label5.Location = new Point(48, 181);
-            label5.Name = "label5";
-            label5.Size = new Size(94, 21);
-            label5.TabIndex = 5;
-            label5.Text = "Результат :";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(273, 334);
-            label7.Name = "label7";
-            label7.Size = new Size(126, 15);
-            label7.TabIndex = 7;
-            label7.Text = "Введите n-ый секрет :";
-            label7.Click += label7_Click;
-            // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(273, 295);
+            label10.Location = new Point(82, 293);
             label10.Name = "label10";
             label10.Size = new Size(208, 15);
             label10.TabIndex = 10;
             label10.Text = "Введите количество частей секрета :";
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label11.Location = new Point(239, 366);
-            label11.Name = "label11";
-            label11.Size = new Size(94, 21);
-            label11.TabIndex = 11;
-            label11.Text = "Результат :";
             // 
             // btnSplit
             // 
@@ -245,20 +206,20 @@ namespace SeparationSecret
             btnSplit.UseVisualStyleBackColor = false;
             btnSplit.Click += btnSplit_Click;
             // 
-            // button2
+            // btnRestore_Click
             // 
-            button2.BackColor = SystemColors.Menu;
-            button2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            helpProvider.SetHelpKeyword(button2, "faq.htm");
-            helpProvider.SetHelpNavigator(button2, HelpNavigator.TopicId);
-            button2.Location = new Point(239, 259);
-            button2.Name = "button2";
-            helpProvider.SetShowHelp(button2, true);
-            button2.Size = new Size(181, 33);
-            button2.TabIndex = 13;
-            button2.Text = "Восстановить секрет";
-            button2.UseVisualStyleBackColor = false;
-            button2.Click += button2_Click;
+            btnRestore_Click.BackColor = SystemColors.Menu;
+            btnRestore_Click.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            helpProvider.SetHelpKeyword(btnRestore_Click, "faq.htm");
+            helpProvider.SetHelpNavigator(btnRestore_Click, HelpNavigator.TopicId);
+            btnRestore_Click.Location = new Point(48, 257);
+            btnRestore_Click.Name = "btnRestore_Click";
+            helpProvider.SetShowHelp(btnRestore_Click, true);
+            btnRestore_Click.Size = new Size(181, 33);
+            btnRestore_Click.TabIndex = 13;
+            btnRestore_Click.Text = "Восстановить секрет";
+            btnRestore_Click.UseVisualStyleBackColor = false;
+            btnRestore_Click.Click += button2_Click;
             // 
             // txtSecret
             // 
@@ -293,52 +254,16 @@ namespace SeparationSecret
             txtMinParts.Size = new Size(100, 23);
             txtMinParts.TabIndex = 22;
             // 
-            // textBox4
+            // txtRestorePartsCount
             // 
-            textBox4.BackColor = SystemColors.Menu;
-            helpProvider.SetHelpKeyword(textBox4, "faq.htm");
-            helpProvider.SetHelpNavigator(textBox4, HelpNavigator.TopicId);
-            textBox4.Location = new Point(339, 368);
-            textBox4.Name = "textBox4";
-            textBox4.ReadOnly = true;
-            helpProvider.SetShowHelp(textBox4, true);
-            textBox4.Size = new Size(100, 23);
-            textBox4.TabIndex = 24;
-            // 
-            // textBox5
-            // 
-            textBox5.BackColor = SystemColors.Menu;
-            helpProvider.SetHelpKeyword(textBox5, "faq.htm");
-            helpProvider.SetHelpNavigator(textBox5, HelpNavigator.TopicId);
-            textBox5.Location = new Point(405, 331);
-            textBox5.Name = "textBox5";
-            helpProvider.SetShowHelp(textBox5, true);
-            textBox5.Size = new Size(100, 23);
-            textBox5.TabIndex = 25;
-            // 
-            // textBox6
-            // 
-            textBox6.BackColor = SystemColors.Menu;
-            helpProvider.SetHelpKeyword(textBox6, "faq.htm");
-            helpProvider.SetHelpNavigator(textBox6, HelpNavigator.TopicId);
-            textBox6.Location = new Point(487, 292);
-            textBox6.Name = "textBox6";
-            helpProvider.SetShowHelp(textBox6, true);
-            textBox6.Size = new Size(100, 23);
-            textBox6.TabIndex = 26;
-            // 
-            // textBox7
-            // 
-            textBox7.BackColor = SystemColors.Menu;
-            helpProvider.SetHelpKeyword(textBox7, "faq.htm");
-            helpProvider.SetHelpNavigator(textBox7, HelpNavigator.TopicId);
-            textBox7.Location = new Point(148, 183);
-            textBox7.Name = "textBox7";
-            textBox7.ReadOnly = true;
-            helpProvider.SetShowHelp(textBox7, true);
-            textBox7.Size = new Size(100, 23);
-            textBox7.TabIndex = 27;
-            textBox7.TextChanged += textBox7_TextChanged;
+            txtRestorePartsCount.BackColor = SystemColors.Menu;
+            helpProvider.SetHelpKeyword(txtRestorePartsCount, "faq.htm");
+            helpProvider.SetHelpNavigator(txtRestorePartsCount, HelpNavigator.TopicId);
+            txtRestorePartsCount.Location = new Point(296, 290);
+            txtRestorePartsCount.Name = "txtRestorePartsCount";
+            helpProvider.SetShowHelp(txtRestorePartsCount, true);
+            txtRestorePartsCount.Size = new Size(100, 23);
+            txtRestorePartsCount.TabIndex = 26;
             // 
             // helpProvider
             // 
@@ -350,7 +275,7 @@ namespace SeparationSecret
             btnSave.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             helpProvider.SetHelpKeyword(btnSave, "faq.htm");
             helpProvider.SetHelpNavigator(btnSave, HelpNavigator.Topic);
-            btnSave.Location = new Point(748, 366);
+            btnSave.Location = new Point(723, 203);
             btnSave.Name = "btnSave";
             helpProvider.SetShowHelp(btnSave, true);
             btnSave.Size = new Size(157, 36);
@@ -359,67 +284,36 @@ namespace SeparationSecret
             btnSave.UseVisualStyleBackColor = false;
             btnSave.Click += btnSave_Click;
             // 
-            // label1
+            // btnCalculate_Click
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(905, 154);
-            label1.Name = "label1";
-            label1.Size = new Size(42, 15);
-            label1.TabIndex = 34;
-            label1.Text = "Число";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(975, 154);
-            label6.Name = "label6";
-            label6.Size = new Size(59, 15);
-            label6.TabIndex = 33;
-            label6.Text = "Владелец";
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Location = new Point(813, 154);
-            label8.Name = "label8";
-            label8.Size = new Size(62, 15);
-            label8.TabIndex = 32;
-            label8.Text = "Описание";
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Location = new Point(748, 154);
-            label9.Name = "label9";
-            label9.Size = new Size(32, 15);
-            label9.TabIndex = 31;
-            label9.Text = "Дата";
-            // 
-            // label100
-            // 
-            label100.AutoSize = true;
-            label100.Location = new Point(787, 110);
-            label100.Name = "label100";
-            label100.Size = new Size(135, 15);
-            label100.TabIndex = 29;
-            label100.Text = "Часть секрета ; Модуль";
-            // 
-            // label200
-            // 
-            label200.AutoSize = true;
-            label200.Location = new Point(807, 84);
-            label200.Name = "label200";
-            label200.Size = new Size(45, 15);
-            label200.TabIndex = 28;
-            label200.Text = "Секрет";
+            btnCalculate_Click.BackColor = SystemColors.Menu;
+            btnCalculate_Click.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            helpProvider.SetHelpKeyword(btnCalculate_Click, "faq.htm");
+            helpProvider.SetHelpNavigator(btnCalculate_Click, HelpNavigator.Topic);
+            btnCalculate_Click.Location = new Point(319, 384);
+            btnCalculate_Click.Name = "btnCalculate_Click";
+            helpProvider.SetShowHelp(btnCalculate_Click, true);
+            btnCalculate_Click.Size = new Size(157, 36);
+            btnCalculate_Click.TabIndex = 38;
+            btnCalculate_Click.Text = "Вычислить";
+            btnCalculate_Click.UseVisualStyleBackColor = false;
+            btnCalculate_Click.Click += btnCalculate_Click_Click;
             // 
             // dgvShares
             // 
             dgvShares.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvShares.Location = new Point(748, 183);
+            dgvShares.Location = new Point(699, 47);
             dgvShares.Name = "dgvShares";
             dgvShares.Size = new Size(240, 150);
             dgvShares.TabIndex = 37;
+            // 
+            // dgvRestore
+            // 
+            dgvRestore.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvRestore.Location = new Point(48, 329);
+            dgvRestore.Name = "dgvRestore";
+            dgvRestore.Size = new Size(240, 150);
+            dgvRestore.TabIndex = 39;
             // 
             // MainForm
             // 
@@ -427,27 +321,17 @@ namespace SeparationSecret
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(1131, 503);
+            Controls.Add(dgvRestore);
+            Controls.Add(btnCalculate_Click);
             Controls.Add(dgvShares);
             Controls.Add(btnSave);
-            Controls.Add(label1);
-            Controls.Add(label6);
-            Controls.Add(label8);
-            Controls.Add(label9);
-            Controls.Add(label100);
-            Controls.Add(label200);
-            Controls.Add(textBox7);
-            Controls.Add(textBox6);
-            Controls.Add(textBox5);
-            Controls.Add(textBox4);
+            Controls.Add(txtRestorePartsCount);
             Controls.Add(txtMinParts);
             Controls.Add(txtPartsCount);
             Controls.Add(txtSecret);
-            Controls.Add(button2);
+            Controls.Add(btnRestore_Click);
             Controls.Add(btnSplit);
-            Controls.Add(label11);
             Controls.Add(label10);
-            Controls.Add(label7);
-            Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -464,6 +348,7 @@ namespace SeparationSecret
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvShares).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvRestore).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -488,31 +373,21 @@ namespace SeparationSecret
         private Label label2;
         private Label label3;
         private Label label4;
-        private Label label5;
-        private Label label7;
         private Label label10;
-        private Label label11;
         private Button btnSplit;
-        private Button button2;
+        private Button btnRestore_Click;
         private TextBox txtSecret;
         private TextBox txtPartsCount;
         private TextBox txtMinParts;
-        private TextBox textBox4;
-        private TextBox textBox5;
-        private TextBox textBox6;
-        private TextBox textBox7;
+        private TextBox txtRestorePartsCount;
         private HelpProvider helpProvider;
         private ToolStripMenuItem выходИзАккаунтаToolStripMenuItem;
         private ToolStripMenuItem аккаунтToolStripMenuItem;
         private ToolStripMenuItem настройкиToolStripMenuItem;
         private ToolStripMenuItem историяToolStripMenuItem;
-        private Label label1;
-        private Label label6;
-        private Label label8;
-        private Label label9;
-        private Label label100;
-        private Label label200;
         private Button btnSave;
         private DataGridView dgvShares;
+        private Button btnCalculate_Click;
+        private DataGridView dgvRestore;
     }
 }
