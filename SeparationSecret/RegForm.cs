@@ -165,11 +165,11 @@ namespace SeparationSecret
             try
             {
                 // Получаем данные из полей ввода
-                string login = txtLogin.Text;
-                string name = txtName.Text;
-                string surname = txtSurname.Text;
-                string password = txtPassword.Text;
-                string patronymic = txtPatronymic.Text;
+                string login = txtLogin.Text.Trim();
+                string name = txtName.Text.Trim();
+                string surname = txtSurname.Text.Trim();
+                string password = txtPassword.Text.Trim();
+                string patronymic = txtPatronymic.Text.Trim();
 
                 // Проверяем, что обязательные поля заполнены
                 if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(name) ||
@@ -179,31 +179,49 @@ namespace SeparationSecret
                     return;
                 }
 
-                // Формируем строку для записи
-                string userData = $"Login: {login}, Password: {password}, Surname: {surname} Name: {name}, Patronymic: {patronymic}\n";
-
-                // Сохраняем данные в файл Log.txt
                 string filePath = Path.Combine(Application.StartupPath, "Log.txt");
-                File.AppendAllText(filePath, userData); // Используем AppendAllText для добавления новых записей
+
+                // Проверка на уникальность логина
+                if (File.Exists(filePath))
+                {
+                    string[] existingUsers = File.ReadAllLines(filePath);
+                    bool loginExists = existingUsers.Any(line =>
+                        line.StartsWith("Login: ") &&
+                        line.Substring(7).Split(',')[0].Trim().Equals(login, StringComparison.OrdinalIgnoreCase));
+
+                    if (loginExists)
+                    {
+                        MessageBox.Show("Пользователь с таким логином уже существует. Выберите другой логин.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+
+                // Формируем строку для записи
+                string userData = $"Login: {login}, Password: {password}, Surname: {surname}, Name: {name}, Patronymic: {patronymic}\n";
+
+                // Сохраняем данные в файл
+                File.AppendAllText(filePath, userData);
 
                 MessageBox.Show("Пользователь успешно зарегистрирован.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Очищаем поля после успешной регистрации (опционально)
+                // Очистка полей
                 txtLogin.Clear();
                 txtName.Clear();
                 txtSurname.Clear();
                 txtPassword.Clear();
                 txtPatronymic.Clear();
+
+                Program.CurrentUsername = login;
+
+                // Переход в основное окно
+                MainForm mainForm = new MainForm();
+                mainForm.Show();
+                this.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
-            MainForm MainForm = new MainForm();
-            MainForm.Show();
-            this.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -214,6 +232,11 @@ namespace SeparationSecret
         }
 
         private void label_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
         {
 
         }

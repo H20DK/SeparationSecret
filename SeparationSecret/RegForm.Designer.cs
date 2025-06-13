@@ -214,6 +214,7 @@ namespace SeparationSecret
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(100, 23);
             txtPassword.TabIndex = 25;
+            txtPassword.TextChanged += txtPassword_TextChanged;
             // 
             // txtLogin
             // 

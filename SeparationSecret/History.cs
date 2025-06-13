@@ -14,6 +14,8 @@ namespace SeparationSecret
 {
     public partial class History : Form
     {
+        private DataTable historyTable;
+
         public static int NumberLanguage = 0;
         int Nlanguage
         {
@@ -31,17 +33,19 @@ namespace SeparationSecret
                 оПрограммеToolStripMenuItem.Text = aboutTheProgram[Nlanguage];
                 руководствоПользователяToolStripMenuItem.Text = userManual[Nlanguage];
                 языкToolStripMenuItem.Text = language[Nlanguage];
-                
-                label200.Text = enterSecret[Nlanguage];
+
                 label3.Text = enterNumberPartsSecret[Nlanguage];
                 label1.Text = enterMinimumRequiredNumberPartsSecretRecover[Nlanguage];
-                
+
             }
         }
         public History(string v, string d)
         {
             InitializeComponent();
             Program.RegisterForm(this); // Регистрируем форму
+
+            InitializeHistoryTable();
+            LoadHistoryForUser(Program.CurrentUsername);
 
             label1.Text = v;
             label3.Text = d;
@@ -64,6 +68,48 @@ namespace SeparationSecret
             if (!File.Exists(helpFilePath))
             {
                 File.WriteAllBytes(helpFilePath, Properties.Resources.HelpFile); // Извлекаем из ресурсов
+            }
+        }
+
+        private void InitializeHistoryTable()
+        {
+            historyTable = new DataTable();
+            historyTable.Columns.Add("Дата");
+            historyTable.Columns.Add("Описание");
+            historyTable.Columns.Add("Число");
+
+            dgvHistory.DataSource = historyTable;
+        }
+
+        private void LoadHistoryForUser(string username)
+        {
+            string filePath = Path.Combine(Application.StartupPath, "shares.txt");
+
+            if (!File.Exists(filePath))
+            {
+                MessageBox.Show("Файл с историей (shares.txt) не найден.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string[] lines = File.ReadAllLines(filePath);
+            if (lines.Length <= 1)
+                return;
+
+            foreach (var line in lines.Skip(1)) // Пропустить заголовок
+            {
+                string[] parts = line.Split('|');
+                if (parts.Length < 5)
+                    continue;
+
+                string владелец = parts[4].Trim();
+                if (string.Equals(владелец, username, StringComparison.OrdinalIgnoreCase))
+                {
+                    historyTable.Rows.Add(
+                        parts[0].Trim(),
+                        parts[1].Trim(),
+                        parts[2].Trim()
+                    );
+                }
             }
         }
 
@@ -147,6 +193,18 @@ namespace SeparationSecret
         private void englishToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Nlanguage = 1;
+        }
+
+        private void назадToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MainForm MainForm = new MainForm();
+            MainForm.Show();
+            this.Close();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

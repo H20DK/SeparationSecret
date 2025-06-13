@@ -6,6 +6,7 @@ namespace SecretSharing
 {
     static class Program
     {
+        public static string CurrentUsername = ""; // будет устанавливаться после входа или регистрации
         private static List<Form> openForms = new List<Form>();
         /// <summary>
         ///  The main entry point for the application.

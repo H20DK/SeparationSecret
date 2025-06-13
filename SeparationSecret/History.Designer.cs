@@ -28,13 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label200 = new Label();
-            label100 = new Label();
-            tableLayoutPanel1 = new TableLayoutPanel();
             label1 = new Label();
             menuStrip1 = new MenuStrip();
             файлToolStripMenuItem = new ToolStripMenuItem();
             выходToolStripMenuItem = new ToolStripMenuItem();
+            назадToolStripMenuItem = new ToolStripMenuItem();
             справкаToolStripMenuItem = new ToolStripMenuItem();
             оПрограммеToolStripMenuItem = new ToolStripMenuItem();
             руководствоПользователяToolStripMenuItem = new ToolStripMenuItem();
@@ -43,50 +41,16 @@
             englishToolStripMenuItem = new ToolStripMenuItem();
             helpProvider = new HelpProvider();
             label2 = new Label();
-            label4 = new Label();
             label3 = new Label();
+            dgvHistory = new DataGridView();
             menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvHistory).BeginInit();
             SuspendLayout();
-            // 
-            // label200
-            // 
-            label200.AutoSize = true;
-            label200.Location = new Point(359, 94);
-            label200.Name = "label200";
-            label200.Size = new Size(45, 15);
-            label200.TabIndex = 16;
-            label200.Text = "Секрет";
-            // 
-            // label100
-            // 
-            label100.AutoSize = true;
-            label100.Location = new Point(339, 120);
-            label100.Name = "label100";
-            label100.Size = new Size(135, 15);
-            label100.TabIndex = 18;
-            label100.Text = "Часть секрета ; Модуль";
-            // 
-            // tableLayoutPanel1
-            // 
-            tableLayoutPanel1.ColumnCount = 4;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 77F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 73F));
-            tableLayoutPanel1.Location = new Point(269, 198);
-            tableLayoutPanel1.Margin = new Padding(3, 2, 3, 2);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 2;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(326, 129);
-            tableLayoutPanel1.TabIndex = 20;
-            tableLayoutPanel1.Paint += tableLayoutPanel1_Paint;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(300, 164);
+            label1.Location = new Point(254, 66);
             label1.Name = "label1";
             label1.Size = new Size(32, 15);
             label1.TabIndex = 21;
@@ -104,7 +68,7 @@
             // 
             // файлToolStripMenuItem
             // 
-            файлToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { выходToolStripMenuItem });
+            файлToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { выходToolStripMenuItem, назадToolStripMenuItem });
             файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             файлToolStripMenuItem.Size = new Size(48, 20);
             файлToolStripMenuItem.Text = "Файл";
@@ -115,6 +79,13 @@
             выходToolStripMenuItem.Size = new Size(196, 22);
             выходToolStripMenuItem.Text = "Выход из приложения";
             выходToolStripMenuItem.Click += выходToolStripMenuItem_Click;
+            // 
+            // назадToolStripMenuItem
+            // 
+            назадToolStripMenuItem.Name = "назадToolStripMenuItem";
+            назадToolStripMenuItem.Size = new Size(196, 22);
+            назадToolStripMenuItem.Text = "Назад";
+            назадToolStripMenuItem.Click += назадToolStripMenuItem_Click;
             // 
             // справкаToolStripMenuItem
             // 
@@ -165,29 +136,32 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(365, 164);
+            label2.Location = new Point(359, 66);
             label2.Name = "label2";
             label2.Size = new Size(62, 15);
             label2.TabIndex = 23;
             label2.Text = "Описание";
             // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(527, 164);
-            label4.Name = "label4";
-            label4.Size = new Size(59, 15);
-            label4.TabIndex = 24;
-            label4.Text = "Владелец";
-            // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(457, 164);
+            label3.Location = new Point(482, 66);
             label3.Name = "label3";
             label3.Size = new Size(42, 15);
             label3.TabIndex = 25;
             label3.Text = "Число";
+            label3.Click += label3_Click;
+            // 
+            // dgvHistory
+            // 
+            dgvHistory.AllowUserToAddRows = false;
+            dgvHistory.AllowUserToDeleteRows = false;
+            dgvHistory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvHistory.Location = new Point(213, 95);
+            dgvHistory.Name = "dgvHistory";
+            dgvHistory.ReadOnly = true;
+            dgvHistory.Size = new Size(356, 332);
+            dgvHistory.TabIndex = 26;
             // 
             // History
             // 
@@ -195,14 +169,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(828, 458);
+            Controls.Add(dgvHistory);
             Controls.Add(label3);
-            Controls.Add(label4);
             Controls.Add(label2);
             Controls.Add(menuStrip1);
             Controls.Add(label1);
-            Controls.Add(tableLayoutPanel1);
-            Controls.Add(label100);
-            Controls.Add(label200);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MinimizeBox = false;
@@ -212,14 +183,12 @@
             Load += History_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvHistory).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private Label label200;
-        private Label label100;
-        private TableLayoutPanel tableLayoutPanel1;
         private Label label1;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem файлToolStripMenuItem;
@@ -232,7 +201,8 @@
         private ToolStripMenuItem englishToolStripMenuItem;
         private HelpProvider helpProvider;
         private Label label2;
-        private Label label4;
         private Label label3;
+        private ToolStripMenuItem назадToolStripMenuItem;
+        private DataGridView dgvHistory;
     }
 }

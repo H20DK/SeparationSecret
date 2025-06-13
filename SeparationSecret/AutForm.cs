@@ -197,6 +197,8 @@ namespace SeparationSecret
                 {
                     MessageBox.Show("Вход успешно выполнен!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                    Program.CurrentUsername = login;
+
                     // Открываем основную форму
                     MainForm mainForm = new MainForm();
                     mainForm.Show();

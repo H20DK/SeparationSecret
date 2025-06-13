@@ -268,7 +268,7 @@ namespace SeparationSecret
             btnCalculate_Click.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             helpProvider.SetHelpKeyword(btnCalculate_Click, "faq.htm");
             helpProvider.SetHelpNavigator(btnCalculate_Click, HelpNavigator.Topic);
-            btnCalculate_Click.Location = new Point(332, 384);
+            btnCalculate_Click.Location = new Point(428, 379);
             btnCalculate_Click.Name = "btnCalculate_Click";
             helpProvider.SetShowHelp(btnCalculate_Click, true);
             btnCalculate_Click.Size = new Size(183, 36);
@@ -280,17 +280,17 @@ namespace SeparationSecret
             // dgvShares
             // 
             dgvShares.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvShares.Location = new Point(699, 47);
+            dgvShares.Location = new Point(618, 47);
             dgvShares.Name = "dgvShares";
-            dgvShares.Size = new Size(240, 150);
+            dgvShares.Size = new Size(400, 153);
             dgvShares.TabIndex = 37;
             // 
             // dgvRestore
             // 
             dgvRestore.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvRestore.Location = new Point(48, 329);
+            dgvRestore.Location = new Point(48, 330);
             dgvRestore.Name = "dgvRestore";
-            dgvRestore.Size = new Size(240, 150);
+            dgvRestore.Size = new Size(349, 146);
             dgvRestore.TabIndex = 39;
             // 
             // MainForm
