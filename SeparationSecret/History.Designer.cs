@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
             menuStrip1 = new MenuStrip();
             файлToolStripMenuItem = new ToolStripMenuItem();
             выходToolStripMenuItem = new ToolStripMenuItem();
@@ -40,21 +39,11 @@
             русскийToolStripMenuItem = new ToolStripMenuItem();
             englishToolStripMenuItem = new ToolStripMenuItem();
             helpProvider = new HelpProvider();
-            label2 = new Label();
-            label3 = new Label();
             dgvHistory = new DataGridView();
+            выходИзАккаунтаToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvHistory).BeginInit();
             SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(254, 66);
-            label1.Name = "label1";
-            label1.Size = new Size(32, 15);
-            label1.TabIndex = 21;
-            label1.Text = "Дата";
             // 
             // menuStrip1
             // 
@@ -68,7 +57,7 @@
             // 
             // файлToolStripMenuItem
             // 
-            файлToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { выходToolStripMenuItem, назадToolStripMenuItem });
+            файлToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { выходИзАккаунтаToolStripMenuItem, выходToolStripMenuItem, назадToolStripMenuItem });
             файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             файлToolStripMenuItem.Size = new Size(48, 20);
             файлToolStripMenuItem.Text = "Файл";
@@ -133,35 +122,24 @@
             // 
             helpProvider.HelpNamespace = "SeparationSecretHelp.chm";
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(359, 66);
-            label2.Name = "label2";
-            label2.Size = new Size(62, 15);
-            label2.TabIndex = 23;
-            label2.Text = "Описание";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(482, 66);
-            label3.Name = "label3";
-            label3.Size = new Size(42, 15);
-            label3.TabIndex = 25;
-            label3.Text = "Число";
-            label3.Click += label3_Click;
-            // 
             // dgvHistory
             // 
             dgvHistory.AllowUserToAddRows = false;
             dgvHistory.AllowUserToDeleteRows = false;
             dgvHistory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvHistory.Location = new Point(213, 95);
+            dgvHistory.Location = new Point(216, 55);
             dgvHistory.Name = "dgvHistory";
             dgvHistory.ReadOnly = true;
             dgvHistory.Size = new Size(356, 332);
             dgvHistory.TabIndex = 26;
+            dgvHistory.CellContentClick += dgvHistory_CellContentClick;
+            // 
+            // выходИзАккаунтаToolStripMenuItem
+            // 
+            выходИзАккаунтаToolStripMenuItem.Name = "выходИзАккаунтаToolStripMenuItem";
+            выходИзАккаунтаToolStripMenuItem.Size = new Size(196, 22);
+            выходИзАккаунтаToolStripMenuItem.Text = "Выход из аккаунта";
+            выходИзАккаунтаToolStripMenuItem.Click += выходИзАккаунтаToolStripMenuItem_Click;
             // 
             // History
             // 
@@ -170,10 +148,7 @@
             BackColor = SystemColors.Window;
             ClientSize = new Size(828, 458);
             Controls.Add(dgvHistory);
-            Controls.Add(label3);
-            Controls.Add(label2);
             Controls.Add(menuStrip1);
-            Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MinimizeBox = false;
@@ -189,7 +164,6 @@
         }
 
         #endregion
-        private Label label1;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem файлToolStripMenuItem;
         private ToolStripMenuItem выходToolStripMenuItem;
@@ -200,9 +174,8 @@
         private ToolStripMenuItem русскийToolStripMenuItem;
         private ToolStripMenuItem englishToolStripMenuItem;
         private HelpProvider helpProvider;
-        private Label label2;
-        private Label label3;
         private ToolStripMenuItem назадToolStripMenuItem;
         private DataGridView dgvHistory;
+        private ToolStripMenuItem выходИзАккаунтаToolStripMenuItem;
     }
 }

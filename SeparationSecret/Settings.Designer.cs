@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            label2 = new Label();
             label4 = new Label();
             label3 = new Label();
             menuStrip1 = new MenuStrip();
@@ -43,30 +41,15 @@
             русскийToolStripMenuItem = new ToolStripMenuItem();
             englishToolStripMenuItem = new ToolStripMenuItem();
             helpProvider = new HelpProvider();
-            textBox2 = new TextBox();
             button1 = new Button();
-            textBox1 = new TextBox();
-            textBox3 = new TextBox();
+            txtOldPassword = new TextBox();
+            txtNewPassword = new TextBox();
+            txtConfirmPassword = new TextBox();
+            label = new Label();
+            label1 = new Label();
+            выходИзПриложенияToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(194, 95);
-            label1.Name = "label1";
-            label1.Size = new Size(128, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Форма смены пароля";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(262, 159);
-            label2.Name = "label2";
-            label2.Size = new Size(86, 15);
-            label2.TabIndex = 1;
-            label2.Text = "Введите логин";
             // 
             // label4
             // 
@@ -82,9 +65,9 @@
             label3.AutoSize = true;
             label3.Location = new Point(262, 194);
             label3.Name = "label3";
-            label3.Size = new Size(144, 15);
+            label3.Size = new Size(136, 15);
             label3.TabIndex = 3;
-            label3.Text = "Введите текущий пароль";
+            label3.Text = "Введите старый пароль";
             // 
             // menuStrip1
             // 
@@ -98,7 +81,7 @@
             // 
             // фToolStripMenuItem
             // 
-            фToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { вToolStripMenuItem, выToolStripMenuItem });
+            фToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { вToolStripMenuItem, выходИзПриложенияToolStripMenuItem, выToolStripMenuItem });
             фToolStripMenuItem.Name = "фToolStripMenuItem";
             фToolStripMenuItem.Size = new Size(48, 20);
             фToolStripMenuItem.Text = "Файл";
@@ -163,52 +146,79 @@
             // 
             helpProvider.HelpNamespace = "SeparationSecretHelp.chm";
             // 
-            // textBox2
-            // 
-            textBox2.BackColor = SystemColors.Menu;
-            helpProvider.SetHelpKeyword(textBox2, "faq.htm");
-            helpProvider.SetHelpNavigator(textBox2, HelpNavigator.TopicId);
-            textBox2.Location = new Point(372, 157);
-            textBox2.Name = "textBox2";
-            helpProvider.SetShowHelp(textBox2, true);
-            textBox2.Size = new Size(100, 23);
-            textBox2.TabIndex = 18;
-            // 
             // button1
             // 
             button1.BackColor = SystemColors.Menu;
             button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             helpProvider.SetHelpKeyword(button1, "faq.htm");
             helpProvider.SetHelpNavigator(button1, HelpNavigator.Topic);
-            button1.Location = new Point(256, 276);
+            button1.Location = new Point(256, 335);
             button1.Name = "button1";
             helpProvider.SetShowHelp(button1, true);
             button1.Size = new Size(164, 33);
             button1.TabIndex = 17;
             button1.Text = "Сменить пароль";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
-            // textBox1
+            // txtOldPassword
             // 
-            textBox1.BackColor = SystemColors.Menu;
-            helpProvider.SetHelpKeyword(textBox1, "faq.htm");
-            helpProvider.SetHelpNavigator(textBox1, HelpNavigator.TopicId);
-            textBox1.Location = new Point(426, 192);
-            textBox1.Name = "textBox1";
-            helpProvider.SetShowHelp(textBox1, true);
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 19;
+            txtOldPassword.BackColor = SystemColors.Menu;
+            helpProvider.SetHelpKeyword(txtOldPassword, "faq.htm");
+            helpProvider.SetHelpNavigator(txtOldPassword, HelpNavigator.TopicId);
+            txtOldPassword.Location = new Point(426, 192);
+            txtOldPassword.Name = "txtOldPassword";
+            helpProvider.SetShowHelp(txtOldPassword, true);
+            txtOldPassword.Size = new Size(100, 23);
+            txtOldPassword.TabIndex = 19;
             // 
-            // textBox3
+            // txtNewPassword
             // 
-            textBox3.BackColor = SystemColors.Menu;
-            helpProvider.SetHelpKeyword(textBox3, "faq.htm");
-            helpProvider.SetHelpNavigator(textBox3, HelpNavigator.TopicId);
-            textBox3.Location = new Point(426, 223);
-            textBox3.Name = "textBox3";
-            helpProvider.SetShowHelp(textBox3, true);
-            textBox3.Size = new Size(100, 23);
-            textBox3.TabIndex = 20;
+            txtNewPassword.BackColor = SystemColors.Menu;
+            helpProvider.SetHelpKeyword(txtNewPassword, "faq.htm");
+            helpProvider.SetHelpNavigator(txtNewPassword, HelpNavigator.TopicId);
+            txtNewPassword.Location = new Point(426, 223);
+            txtNewPassword.Name = "txtNewPassword";
+            helpProvider.SetShowHelp(txtNewPassword, true);
+            txtNewPassword.Size = new Size(100, 23);
+            txtNewPassword.TabIndex = 20;
+            // 
+            // txtConfirmPassword
+            // 
+            txtConfirmPassword.BackColor = SystemColors.Menu;
+            helpProvider.SetHelpKeyword(txtConfirmPassword, "faq.htm");
+            helpProvider.SetHelpNavigator(txtConfirmPassword, HelpNavigator.TopicId);
+            txtConfirmPassword.Location = new Point(426, 258);
+            txtConfirmPassword.Name = "txtConfirmPassword";
+            helpProvider.SetShowHelp(txtConfirmPassword, true);
+            txtConfirmPassword.Size = new Size(100, 23);
+            txtConfirmPassword.TabIndex = 23;
+            // 
+            // label
+            // 
+            label.AutoSize = true;
+            label.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label.Location = new Point(256, 64);
+            label.Name = "label";
+            label.Size = new Size(238, 30);
+            label.TabIndex = 21;
+            label.Text = "Форма смены пароля";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(262, 258);
+            label1.Name = "label1";
+            label1.Size = new Size(120, 15);
+            label1.TabIndex = 22;
+            label1.Text = "Подтвердите пароль";
+            // 
+            // выходИзПриложенияToolStripMenuItem
+            // 
+            выходИзПриложенияToolStripMenuItem.Name = "выходИзПриложенияToolStripMenuItem";
+            выходИзПриложенияToolStripMenuItem.Size = new Size(196, 22);
+            выходИзПриложенияToolStripMenuItem.Text = "Выход из приложения";
+            выходИзПриложенияToolStripMenuItem.Click += выходИзПриложенияToolStripMenuItem_Click;
             // 
             // Settings
             // 
@@ -216,15 +226,15 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(828, 458);
-            Controls.Add(textBox3);
-            Controls.Add(textBox1);
-            Controls.Add(textBox2);
+            Controls.Add(txtConfirmPassword);
+            Controls.Add(label1);
+            Controls.Add(label);
+            Controls.Add(txtNewPassword);
+            Controls.Add(txtOldPassword);
             Controls.Add(button1);
             Controls.Add(menuStrip1);
             Controls.Add(label3);
             Controls.Add(label4);
-            Controls.Add(label2);
-            Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MinimizeBox = false;
@@ -239,9 +249,6 @@
         }
 
         #endregion
-
-        private Label label1;
-        private Label label2;
         private Label label4;
         private Label label3;
         private MenuStrip menuStrip1;
@@ -254,10 +261,13 @@
         private ToolStripMenuItem русскийToolStripMenuItem;
         private ToolStripMenuItem englishToolStripMenuItem;
         private HelpProvider helpProvider;
-        private TextBox textBox2;
         private Button button1;
-        private TextBox textBox1;
-        private TextBox textBox3;
+        private TextBox txtOldPassword;
+        private TextBox txtNewPassword;
         private ToolStripMenuItem вToolStripMenuItem;
+        private Label label;
+        private TextBox txtConfirmPassword;
+        private Label label1;
+        private ToolStripMenuItem выходИзПриложенияToolStripMenuItem;
     }
 }

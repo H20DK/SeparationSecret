@@ -34,8 +34,10 @@ namespace SeparationSecret
                 руководствоПользователяToolStripMenuItem.Text = userManual[Nlanguage];
                 языкToolStripMenuItem.Text = language[Nlanguage];
 
-                label3.Text = enterNumberPartsSecret[Nlanguage];
-                label1.Text = enterMinimumRequiredNumberPartsSecretRecover[Nlanguage];
+                выходИзАккаунтаToolStripMenuItem.Text = output2[Nlanguage];
+                выходToolStripMenuItem.Text = output[Nlanguage];
+                назадToolStripMenuItem.Text = back[Nlanguage];
+
 
             }
         }
@@ -47,8 +49,6 @@ namespace SeparationSecret
             InitializeHistoryTable();
             LoadHistoryForUser(Program.CurrentUsername);
 
-            label1.Text = v;
-            label3.Text = d;
 
             // Настройка HelpProvider
             helpProvider = new HelpProvider();
@@ -60,15 +60,6 @@ namespace SeparationSecret
             // Включение обработки клавиш на уровне формы
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(Form1_KeyDown);
-        }
-
-        private void EnsureHelpFileExists()
-        {
-            string helpFilePath = Path.Combine(Application.StartupPath, "Properties", "SeparationSecretHelp.chm");
-            if (!File.Exists(helpFilePath))
-            {
-                File.WriteAllBytes(helpFilePath, Properties.Resources.HelpFile); // Извлекаем из ресурсов
-            }
         }
 
         private void InitializeHistoryTable()
@@ -134,18 +125,12 @@ namespace SeparationSecret
         static List<string> file = new List<string>() { "Аккаунт", "Account" };
         static List<string> output = new List<string>() { "Выход из приложения", "Exiting the app" };
         static List<string> output2 = new List<string>() { "Выход из аккаунта", "Exit from account" };
-        static List<string> settings = new List<string>() { "Настройки", "Settings" };
+        static List<string> back = new List<string>() { "Назад", "Back" };
+
         static List<string> help = new List<string>() { "Справка", "Help" };
         static List<string> aboutTheProgram = new List<string>() { "О программе", "About the program" };
         static List<string> userManual = new List<string>() { "Руководство пользователя", "User manual" };
         static List<string> language = new List<string>() { "Язык", "Language" };
-        static List<string> shareSecret = new List<string>() { "Разделить секрет", "Share a secret:" };
-        static List<string> enterSecret = new List<string>() { "Введите секрет :", "Enter the secret :" };
-        static List<string> enterNumberPartsSecret = new List<string>() { "Введите количество частей секрета :", "Enter the number of parts of the secret :" };
-        static List<string> enterMinimumRequiredNumberPartsSecretRecover = new List<string>() { "Введите минимально необходимое кол-во частей секрета для восстановления :", "Enter the minimum required number of parts of secret to recover :" };
-        static List<string> result = new List<string>() { "Результат :", "Result :" };
-        static List<string> recoverSecret = new List<string>() { "Восстановить секрет", "Recover secret" };
-        static List<string> enterNthSecret = new List<string>() { "Введите n-ый секрет:", "Enter the nth secret :" };
 
         public static List<string> errorNonNumber = new List<string>() { "не число", "Not a number" };
         public static List<string> errorFormat = new List<string>() { "Неправильный формат ввода", "Incorrect input format" };
@@ -205,6 +190,18 @@ namespace SeparationSecret
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dgvHistory_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void выходИзАккаунтаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AutForm AutForm = new AutForm();
+            AutForm.Show();
+            this.Close();
         }
     }
 }
