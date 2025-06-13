@@ -35,15 +35,15 @@ namespace SeparationSecret
                 оПрограммеToolStripMenuItem.Text = aboutTheProgram[Nlanguage];
                 руководствоПользователяToolStripMenuItem.Text = userManual[Nlanguage];
                 языкToolStripMenuItem.Text = language[Nlanguage];
+                историяToolStripMenuItem.Text = history[Nlanguage];
+
                 btnSplit.Text = shareSecret[Nlanguage];
                 label2.Text = enterSecret[Nlanguage];
                 label3.Text = enterNumberPartsSecret[Nlanguage];
-                label4.Text = enterMinimumRequiredNumberPartsSecretRecover[Nlanguage];
-                label5.Text = result[Nlanguage];
+                btnCalculate_Click.Text = calculate[Nlanguage];
                 btnRestore_Click.Text = recoverSecret[Nlanguage];
+                btnSave.Text = save[Nlanguage];
                 label10.Text = enterNumberPartsSecret[Nlanguage];
-                label7.Text = enterNthSecret[Nlanguage];
-                label11.Text = result[Nlanguage];
             }
         }
         public MainForm()
@@ -98,6 +98,7 @@ namespace SeparationSecret
         static List<string> output = new List<string>() { "Выход из приложения", "Exiting the app" };
         static List<string> output2 = new List<string>() { "Выход из аккаунта", "Exit from account" };
         static List<string> settings = new List<string>() { "Настройки", "Settings" };
+        static List<string> history = new List<string>() { "История", "History" };
         static List<string> help = new List<string>() { "Справка", "Help" };
         static List<string> aboutTheProgram = new List<string>() { "О программе", "About the program" };
         static List<string> userManual = new List<string>() { "Руководство пользователя", "User manual" };
@@ -105,10 +106,10 @@ namespace SeparationSecret
         static List<string> shareSecret = new List<string>() { "Разделить секрет", "Share a secret:" };
         static List<string> enterSecret = new List<string>() { "Введите секрет :", "Enter the secret :" };
         static List<string> enterNumberPartsSecret = new List<string>() { "Введите количество частей секрета :", "Enter the number of parts of the secret :" };
-        static List<string> enterMinimumRequiredNumberPartsSecretRecover = new List<string>() { "Введите минимально необходимое кол-во частей секрета для восстановления :", "Enter the minimum required number of parts of secret to recover :" };
-        static List<string> result = new List<string>() { "Результат :", "Result :" };
-        static List<string> recoverSecret = new List<string>() { "Восстановить секрет", "Recover secret" };
-        static List<string> enterNthSecret = new List<string>() { "Введите n-ый секрет:", "Enter the nth secret :" };
+
+        static List<string> calculate = new List<string>() { "Восстановить секрет", "Recover secret" };
+        static List<string> recoverSecret = new List<string>() { "Подготовить восстановление", "Prepare recovery" };
+        static List<string> save = new List<string>() { "Сохранить", "Save" };
 
         public static List<string> errorNonNumber = new List<string>() { "не число", "Not a number" };
         public static List<string> errorFormat = new List<string>() { "Неправильный формат ввода", "Incorrect input format" };
@@ -223,7 +224,7 @@ namespace SeparationSecret
                 string currentDate = DateTime.Now.ToString("dd.MM.yyyy"); // 28.05.2025
                 for (int i = 0; i < partsCount; i++)
                 {
-                    restoreTable.Rows.Add(currentDate, $"Часть секрета {i + 1}", "", "");
+                    restoreTable.Rows.Add(currentDate, $"Часть секрета {i + 1}", ""); // Только 3 аргумента
                 }
             }
             catch (Exception ex)
@@ -282,13 +283,11 @@ namespace SeparationSecret
             restoreTable.Columns.Add("Дата", typeof(string));
             restoreTable.Columns.Add("Описание", typeof(string));
             restoreTable.Columns.Add("Число", typeof(string));
-            restoreTable.Columns.Add("Владелец", typeof(string));
 
             dgvRestore.DataSource = restoreTable;
             dgvRestore.Columns["Дата"].ReadOnly = true;
             dgvRestore.Columns["Описание"].ReadOnly = true;
             dgvRestore.Columns["Число"].ReadOnly = false;
-            dgvRestore.Columns["Владелец"].ReadOnly = false;
         }
 
         private void btnSplit_Click(object sender, EventArgs e)
@@ -308,24 +307,18 @@ namespace SeparationSecret
                     return;
                 }
 
-                if (string.IsNullOrWhiteSpace(txtMinParts.Text) || !int.TryParse(txtMinParts.Text, out int minParts) || minParts <= 0 || minParts > partsCount)
-                {
-                    MessageBox.Show("Введите корректное минимальное количество частей (целое число > 0 и ≤ количества частей).", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
                 // Очищаем таблицу
                 sharesTable.Clear();
 
                 // Разделение секрета
-                (BigInteger[] remainders, BigInteger[] moduli) = SplitSecret(secret, partsCount, minParts);
+                (BigInteger[] remainders, BigInteger[] moduli) = SplitSecret(secret, partsCount);
 
                 // Заполняем таблицу
                 string currentDate = DateTime.Now.ToString("dd.MM.yyyy"); // 27.05.2025
                 for (int i = 0; i < partsCount; i++)
                 {
                     string description = $"Часть секрета {i + 1}";
-                    string number = $"{remainders[i]} (mod {moduli[i]})";
+                    string number = $"{remainders[i]}";
                     sharesTable.Rows.Add(currentDate, description, number, "");
                 }
 
@@ -337,7 +330,7 @@ namespace SeparationSecret
             }
         }
 
-        private (BigInteger[], BigInteger[]) SplitSecret(BigInteger secret, int partsCount, int minParts)
+        private (BigInteger[], BigInteger[]) SplitSecret(BigInteger secret, int partsCount)
         {
             try
             {
@@ -411,18 +404,22 @@ namespace SeparationSecret
                 string filePath = Path.Combine(Application.StartupPath, "shares.txt");
                 bool fileExists = File.Exists(filePath);
 
+                // Генерируем модули заново для сохранения (или используем сохранённые ранее)
+                (BigInteger[] remainders, BigInteger[] moduli) = SplitSecret(BigInteger.Parse(txtSecret.Text), sharesTable.Rows.Count);
+
                 using (StreamWriter writer = new StreamWriter(filePath, true)) // append = true для дописывания
                 {
-                    // Если файл создаётся впервые, записываем начальные данные
+                    // Если файл создаётся впервые, записываем заголовок
                     if (!fileExists)
                     {
-                        writer.WriteLine("Дата | Описание | Число | Владелец");
+                        writer.WriteLine("Дата | Описание | Число | Модуль | Владелец");
                     }
 
-                    // Дописываем новые данные из таблицы
-                    foreach (DataRow row in sharesTable.Rows)
+                    // Дописываем новые данные из таблицы с модулями
+                    for (int i = 0; i < sharesTable.Rows.Count; i++)
                     {
-                        writer.WriteLine($"{row["Дата"]} | {row["Описание"]} | {row["Число"]} | {row["Владелец"]}");
+                        DataRow row = sharesTable.Rows[i];
+                        writer.WriteLine($"{row["Дата"]} | {row["Описание"]} | {row["Число"]} | {moduli[i]} | {row["Владелец"]}");
                     }
                 }
 
@@ -445,28 +442,46 @@ namespace SeparationSecret
                     return;
                 }
 
+                string filePath = Path.Combine(Application.StartupPath, "shares.txt");
+                if (!File.Exists(filePath))
+                {
+                    MessageBox.Show("Файл shares.txt не найден. Сначала разделите и сохраните секрет.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Читаем все строки из файла
+                string[] lines = File.ReadAllLines(filePath);
+                if (lines.Length < partsCount)
+                {
+                    MessageBox.Show("Недостаточно данных в файле для восстановления.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 BigInteger[] remainders = new BigInteger[partsCount];
                 BigInteger[] moduli = new BigInteger[partsCount];
 
+                // Берем последние части из файла, соответствующие количеству строк в restoreTable
+                int startIndex = lines.Length - partsCount;
                 for (int i = 0; i < partsCount; i++)
                 {
-                    string number = restoreTable.Rows[i]["Число"].ToString();
-                    if (string.IsNullOrWhiteSpace(number))
+                    string remainderInput = restoreTable.Rows[i]["Число"].ToString();
+                    if (string.IsNullOrWhiteSpace(remainderInput) || !BigInteger.TryParse(remainderInput, out remainders[i]))
                     {
-                        MessageBox.Show($"Поле 'Число' в строке {i + 1} пустое.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show($"Поле 'Число' в строке {i + 1} пустое или некорректное.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
-                    string[] numbers = number.Split(' ');
-                    if (numbers.Length != 2 || !BigInteger.TryParse(numbers[0], out remainders[i]) || !BigInteger.TryParse(numbers[1], out moduli[i]) || moduli[i] <= 0)
+                    // Извлекаем модуль из 4-го столбца (индекс 3)
+                    string[] parts = lines[startIndex + i].Split('|');
+                    if (parts.Length < 4 || !BigInteger.TryParse(parts[3].Trim(), out moduli[i]) || moduli[i] <= 0)
                     {
-                        MessageBox.Show($"Некорректный формат в строке {i + 1}: введите два числа через пробел (остаток модуль).", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show($"Некорректный модуль в строке файла {i + 1}.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
                     if (remainders[i] < 0 || remainders[i] >= moduli[i])
                     {
-                        MessageBox.Show($"Остаток в строке {i + 1} должен быть в диапазоне [0, {moduli[i] - 1}].", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show($"Остаток в строке {i + 1} должен быть в диапазоне [0, {moduli[i] - 1}]. Остаток: {remainders[i]}, Модуль: {moduli[i]}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                 }

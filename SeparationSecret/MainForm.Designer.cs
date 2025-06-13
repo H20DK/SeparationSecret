@@ -44,13 +44,11 @@ namespace SeparationSecret
             аккаунтToolStripMenuItem = new ToolStripMenuItem();
             label2 = new Label();
             label3 = new Label();
-            label4 = new Label();
             label10 = new Label();
             btnSplit = new Button();
             btnRestore_Click = new Button();
             txtSecret = new TextBox();
             txtPartsCount = new TextBox();
-            txtMinParts = new TextBox();
             txtRestorePartsCount = new TextBox();
             helpProvider = new HelpProvider();
             btnSave = new Button();
@@ -173,15 +171,6 @@ namespace SeparationSecret
             label3.Text = "Введите количество частей секрета :";
             label3.Click += label3_Click;
             // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(83, 154);
-            label4.Name = "label4";
-            label4.Size = new Size(448, 15);
-            label4.TabIndex = 4;
-            label4.Text = "Введите минимально необходимое кол-во частей секрета для восстановления :";
-            // 
             // label10
             // 
             label10.AutoSize = true;
@@ -215,9 +204,9 @@ namespace SeparationSecret
             btnRestore_Click.Location = new Point(48, 257);
             btnRestore_Click.Name = "btnRestore_Click";
             helpProvider.SetShowHelp(btnRestore_Click, true);
-            btnRestore_Click.Size = new Size(181, 33);
+            btnRestore_Click.Size = new Size(252, 33);
             btnRestore_Click.TabIndex = 13;
-            btnRestore_Click.Text = "Восстановить секрет";
+            btnRestore_Click.Text = "Подготовить восстановление";
             btnRestore_Click.UseVisualStyleBackColor = false;
             btnRestore_Click.Click += button2_Click;
             // 
@@ -243,17 +232,6 @@ namespace SeparationSecret
             txtPartsCount.Size = new Size(100, 23);
             txtPartsCount.TabIndex = 21;
             // 
-            // txtMinParts
-            // 
-            txtMinParts.BackColor = SystemColors.Menu;
-            helpProvider.SetHelpKeyword(txtMinParts, "faq.htm");
-            helpProvider.SetHelpNavigator(txtMinParts, HelpNavigator.TopicId);
-            txtMinParts.Location = new Point(537, 151);
-            txtMinParts.Name = "txtMinParts";
-            helpProvider.SetShowHelp(txtMinParts, true);
-            txtMinParts.Size = new Size(100, 23);
-            txtMinParts.TabIndex = 22;
-            // 
             // txtRestorePartsCount
             // 
             txtRestorePartsCount.BackColor = SystemColors.Menu;
@@ -275,7 +253,7 @@ namespace SeparationSecret
             btnSave.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             helpProvider.SetHelpKeyword(btnSave, "faq.htm");
             helpProvider.SetHelpNavigator(btnSave, HelpNavigator.Topic);
-            btnSave.Location = new Point(723, 203);
+            btnSave.Location = new Point(737, 215);
             btnSave.Name = "btnSave";
             helpProvider.SetShowHelp(btnSave, true);
             btnSave.Size = new Size(157, 36);
@@ -290,12 +268,12 @@ namespace SeparationSecret
             btnCalculate_Click.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             helpProvider.SetHelpKeyword(btnCalculate_Click, "faq.htm");
             helpProvider.SetHelpNavigator(btnCalculate_Click, HelpNavigator.Topic);
-            btnCalculate_Click.Location = new Point(319, 384);
+            btnCalculate_Click.Location = new Point(332, 384);
             btnCalculate_Click.Name = "btnCalculate_Click";
             helpProvider.SetShowHelp(btnCalculate_Click, true);
-            btnCalculate_Click.Size = new Size(157, 36);
+            btnCalculate_Click.Size = new Size(183, 36);
             btnCalculate_Click.TabIndex = 38;
-            btnCalculate_Click.Text = "Вычислить";
+            btnCalculate_Click.Text = "Восстановить секрет";
             btnCalculate_Click.UseVisualStyleBackColor = false;
             btnCalculate_Click.Click += btnCalculate_Click_Click;
             // 
@@ -326,13 +304,11 @@ namespace SeparationSecret
             Controls.Add(dgvShares);
             Controls.Add(btnSave);
             Controls.Add(txtRestorePartsCount);
-            Controls.Add(txtMinParts);
             Controls.Add(txtPartsCount);
             Controls.Add(txtSecret);
             Controls.Add(btnRestore_Click);
             Controls.Add(btnSplit);
             Controls.Add(label10);
-            Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(menuStrip1);
@@ -372,13 +348,11 @@ namespace SeparationSecret
         private ToolStripMenuItem английскийToolStripMenuItem;
         private Label label2;
         private Label label3;
-        private Label label4;
         private Label label10;
         private Button btnSplit;
         private Button btnRestore_Click;
         private TextBox txtSecret;
         private TextBox txtPartsCount;
-        private TextBox txtMinParts;
         private TextBox txtRestorePartsCount;
         private HelpProvider helpProvider;
         private ToolStripMenuItem выходИзАккаунтаToolStripMenuItem;
