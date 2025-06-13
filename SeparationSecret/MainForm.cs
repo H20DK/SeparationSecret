@@ -13,6 +13,7 @@ namespace SeparationSecret
 {
     public partial class MainForm : Form
     {
+        private BigInteger[] currentModuli; // Сохраняет модули после разделения
         public static int NumberLanguage = 0;
         private DataTable sharesTable; // Таблица для хранения частей секрета
         private DataTable restoreTable;
@@ -312,6 +313,7 @@ namespace SeparationSecret
 
                 // Разделение секрета
                 (BigInteger[] remainders, BigInteger[] moduli) = SplitSecret(secret, partsCount);
+                currentModuli = moduli; // Сохраняем для последующего использования
 
                 // Заполняем таблицу
                 string currentDate = DateTime.Now.ToString("dd.MM.yyyy"); // 27.05.2025
@@ -357,27 +359,54 @@ namespace SeparationSecret
             try
             {
                 BigInteger[] moduli = new BigInteger[count];
-                int[] primes = { 17, 19, 23, 29, 31, 37, 41, 43, 47, 53 }; // Список простых чисел
-                if (count > primes.Length)
-                {
-                    throw new Exception("Слишком много частей. Увеличьте список простых чисел.");
-                }
+                Random rand = new Random();
+                BigInteger minValue = 2;
+                BigInteger maxValue = secret / 2; // Модули меньше половины секрета для разнообразия
 
-                // Выбираем модули меньше секрета
                 for (int i = 0; i < count; i++)
                 {
-                    moduli[i] = primes[i];
+                    BigInteger candidate;
+                    bool found = false;
+                    int attempts = 0;
+                    const int maxAttempts = 1000;
+
+                    do
+                    {
+                        candidate = minValue + rand.Next((int)(maxValue - minValue));
+                        if (candidate <= 1) candidate = 2; // Минимальное значение 2
+                        found = (i == 0 || IsCoprimeWithAll(candidate, moduli, i));
+                        attempts++;
+                        if (attempts > maxAttempts)
+                        {
+                            throw new Exception("Не удалось найти достаточно взаимно простых чисел за допустимое количество попыток.");
+                        }
+                    } while (!found);
+
+                    moduli[i] = candidate;
                 }
 
-                // Проверяем, что произведение модулей больше секрета
+                // Увеличиваем модули, если произведение меньше секрета
                 BigInteger product = 1;
                 foreach (var m in moduli)
                 {
                     product *= m;
                 }
-                if (product <= secret)
+                while (product <= secret)
                 {
-                    throw new Exception("Произведение модулей должно быть больше секрета. Увеличьте количество частей или используйте меньший секрет.");
+                    for (int i = 0; i < count; i++)
+                    {
+                        moduli[i] *= 2; // Удваиваем, сохраняя взаимную простоту
+                        if (!IsCoprimeWithAll(moduli[i], moduli, i))
+                        {
+                            // Если утрачена взаимная простота, генерируем заново
+                            moduli[i] = minValue + rand.Next((int)(maxValue - minValue));
+                        }
+                    }
+                    product = 1;
+                    foreach (var m in moduli)
+                    {
+                        product *= m;
+                    }
                 }
 
                 return moduli;
@@ -386,6 +415,16 @@ namespace SeparationSecret
             {
                 throw new Exception($"Ошибка в GenerateCoprimeNumbers: {ex.Message}", ex);
             }
+        }
+
+        private bool IsCoprimeWithAll(BigInteger number, BigInteger[] moduli, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                if (BigInteger.GreatestCommonDivisor(number, moduli[i]) != 1)
+                    return false;
+            }
+            return true;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -405,7 +444,12 @@ namespace SeparationSecret
                 bool fileExists = File.Exists(filePath);
 
                 // Генерируем модули заново для сохранения (или используем сохранённые ранее)
-                (BigInteger[] remainders, BigInteger[] moduli) = SplitSecret(BigInteger.Parse(txtSecret.Text), sharesTable.Rows.Count);
+                if (currentModuli == null || currentModuli.Length != sharesTable.Rows.Count)
+                {
+                    MessageBox.Show("Модули не найдены или количество не совпадает. Сначала разделите секрет.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                BigInteger[] moduli = currentModuli;
 
                 using (StreamWriter writer = new StreamWriter(filePath, true)) // append = true для дописывания
                 {
