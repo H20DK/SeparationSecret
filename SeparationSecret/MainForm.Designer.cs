@@ -280,9 +280,9 @@ namespace SeparationSecret
             // dgvShares
             // 
             dgvShares.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvShares.Location = new Point(618, 47);
+            dgvShares.Location = new Point(592, 47);
             dgvShares.Name = "dgvShares";
-            dgvShares.Size = new Size(400, 153);
+            dgvShares.Size = new Size(445, 153);
             dgvShares.TabIndex = 37;
             // 
             // dgvRestore
